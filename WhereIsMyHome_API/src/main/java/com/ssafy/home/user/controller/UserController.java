@@ -122,6 +122,7 @@ public class UserController {
 			if(loginUser != null) {
 				logger.info("로그인 DB접근, 비밀번호 확인 성공");
 				status = HttpStatus.ACCEPTED;
+				resultMap.put("loginUser", loginUser);
 				resultMap.put("msg", SUCCESS);
 			}
 			else {

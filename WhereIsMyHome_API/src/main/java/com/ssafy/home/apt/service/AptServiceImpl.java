@@ -3,6 +3,7 @@ package com.ssafy.home.apt.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.home.apt.dao.AptDao;
@@ -13,6 +14,10 @@ public class AptServiceImpl implements AptService{
 
 	private AptDao dao;
 	
+	@Autowired
+	public AptServiceImpl(AptDao dao) {
+		this.dao = dao;
+	}
 	
 	@Override
 	public List<AptDto> infos(String dong) throws SQLException {

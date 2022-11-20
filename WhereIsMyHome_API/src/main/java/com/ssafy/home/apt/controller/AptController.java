@@ -100,6 +100,7 @@ public class AptController {
 		try {
 			logger.info("updateApt - 호출");
 			
+			logger.info("apt 정보"+aptDto);
 			int res = service.insertApt(aptDto);
 
 			if (res == 1) {				

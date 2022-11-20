@@ -14,17 +14,16 @@
 
 	<insert id = "insertApt" parameterType = "AptDto">
 		insert into houseinfo
-		(aptCode, aptName, dongCode, dongName, buildYear, jibun, lat, lng, userid
+		(aptCode, aptName, dongCode, dongName, buildYear, jibun, lat, lng, userid)
 		values(#{aptCode}, #{aptName}, #{dongCode}, #{dongName}, 
-		#{buildYear}, #{jibun},#{lat}, #{userid})
+		#{buildYear}, #{jibun},#{lat},#{lng},#{userid})
 	</insert>
 	
 	
 	
 	<update id="modifyApt" parameterType="AptDto">
 		update houseinfo
-		<trim prefix="set" suffixOverrides=",">
-			<if test="aptCode != null">aptCode = #{aptCode},</if>		
+		<trim prefix="set" suffixOverrides=",">		
 			<if test="aptName != null">aptName = #{aptName},</if>
 			<if test="dongCode != null">dongCode = #{dongCode},</if>
 			<if test="dongName != null">dongName = #{dongName},</if>
@@ -33,14 +32,14 @@
 			<if test="lat != null">lat = #{lat},</if>
 			<if test="lng != null">lng = #{lng},</if>
 		</trim>
-		where userid = #{userid}
+		where aptCode = #{aptCode}
 	
 	</update>
 	
 	
 	<delete id="deleteApt" parameterType="AptDto">
 		delete from houseinfo
-		where userid = #{userid} and lat = #{lat} and lng = #{lng}
+		where aptCode = #{aptCode}
 	</delete>
 	
 </mapper>
