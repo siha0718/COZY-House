@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.home.comment.dao.CommentMapper">
+
+	<sql id="commentCoplumnsS">
+		  cmno, content, star, aptCode, userid
+	</sql>
+	
+	<sql id="commentColumns">
+		  cmno, content, date, star, userid, aptCode
+	</sql>
+
+	<insert id="insertComment" parameterType="CommentDto">
+		INSERT INTO comment (<include refid="commentCoplumnsS"/>)
+		VALUES (#{cmno}, #{content}, #{star}, #{aptCode}, #{userid})
+	</insert>
+
+	
+	<select id="selectCommentDetail" parameterType="CommentDto" resultType="CommentDto">
+		SELECT <include refid="commentColumns" />
+		FROM comment
+		WHERE aptCode = #{aptCode} and cmno = #{cmno}
+	</select>
+	
+
+	<update id="updateComment" parameterType="CommentDto">
+		UPDATE comment
+		SET content = #{content}
+		WHERE cmno = #{cmno}
+	</update>
+
+	<delete id="deleteComment" parameterType="CommentDto">
+		delete from comment
+		where cmno = #{cmno}
+	</delete>
+
+	<select id="selectCommentList" parameterType="int" resultType="CommentDto">
+		SELECT <include refid="commentColumns"/>
+		FROM comment
+		WHERE aptCode = #{aptCode}
+		ORDER BY date DESC;
+	</select>
+
+	<select id="selectCommentTotalCount" parameterType="CommentDto" resultType="int">
+		SELECT COUNT(*)
+		FROM comment
+		WHERE aptCode = #{aptCode}
+	</select>
+
+</mapper>
