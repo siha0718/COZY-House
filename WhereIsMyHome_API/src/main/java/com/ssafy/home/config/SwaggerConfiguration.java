@@ -47,7 +47,7 @@ public class SwaggerConfiguration {
 
 	@Bean
 	public Docket boardApi() {
-		return getDocket("board", "게시판", Predicates.or(PathSelectors.regex("/board.*")));
+		return getDocket("comment", "댓글", Predicates.or(PathSelectors.regex("/comment.*")));
 	}
 
 	@Bean
