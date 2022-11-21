@@ -1,11 +1,8 @@
 <template>
-
   <div id="app">
-    <the-header></the-header>
-    <router-view/>
+    <b-dropdown-item :to="'/apt/search'">아파트검색</b-dropdown-item>
+    <router-view />
   </div>
-
-  
 </template>
 <script>
 import TheHeader from "@/components/TheHeader.vue";
@@ -13,11 +10,10 @@ import TheHeader from "@/components/TheHeader.vue";
 export default {
   components: {
     TheHeader,
-  }
-  
-}
+  },
+};
 </script>
-
+<!-- 
 <style >
 body{
   /* background-color: #d2d3fd!important; */
@@ -106,4 +102,4 @@ a {
 }
 </style>
 
-
+ -->

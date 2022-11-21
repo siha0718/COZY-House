@@ -6,11 +6,10 @@
         main
         <!-- <img src="@/assets/main.jpg" style="height:300px " alt="" /> -->
       </router-link>
-      
+
       <!-- <div class="boardTitle">>
         <router-link to="/board">Board</router-link>
       </div> -->
-    
     </div>
 
     <div>
@@ -30,7 +29,6 @@
 
           <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto">
-
             <b-nav-item-dropdown text="Board" right>
               <b-dropdown-item :to="'/board'">글 목록보기</b-dropdown-item>
               <b-dropdown-item :to="'/board/write'">글 작성하기</b-dropdown-item>
@@ -40,24 +38,24 @@
               <b-dropdown-item :to="'/user/login'">로그인</b-dropdown-item>
               <b-dropdown-item :to="'/user/regist'">회원가입</b-dropdown-item>
             </b-nav-item-dropdown>
+
+            <b-nav-item-dropdown text="Apt">
+              <b-dropdown-item :to="'/apt/search'">아파트검색</b-dropdown-item>
+            </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
     </div>
-
   </div>
-    
-
-  
 </template>
 
 <script>
 export default {
-    name: "TheHeader",
-}
+  name: "TheHeader",
+};
 </script>
 
-<style>
+<!-- <style>
 .header {
   /* padding: 30px; */
   text-align: center;
@@ -75,21 +73,18 @@ a:hover {
 }
 
 .boardTitle {
-  padding-top :65px;
+  padding-top: 65px;
 }
 
-
-.boardTitle a { 
-  color:#fff!important;
-  
+.boardTitle a {
+  color: #fff !important;
 }
 
 .menu {
-  background-color: #d2d3fd!important;
-
+  background-color: #d2d3fd !important;
 }
 
 .menu a {
-  color:#fff!important;
+  color: #fff !important;
 }
-</style>
+</style> -->

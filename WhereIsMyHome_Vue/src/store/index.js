@@ -10,6 +10,7 @@ Vue.use(Vuex);
 const API_USER_URL = `http://localhost:9999/vue/user`;
 const API_BOARD_URL = `http://localhost:9999/vue/board`;
 const API_APT_URL = `http://localhost:9999/vue/apt`;
+const CODE_URL = "https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes";
 
 export default new Vuex.Store({
   state: {
@@ -78,12 +79,12 @@ export default new Vuex.Store({
     ////////APT////////
     SET_SIDO_LIST(state, sidos) {
       sidos.forEach((sido) => {
-        state.sidos.push({ value: sido.sidoCode, text: sido.sidoName });
+        state.sidos.push({ value: sido.code, text: sido.name });
       });
     },
     SET_GUGUN_LIST(state, guguns) {
       guguns.forEach((gugun) => {
-        state.guguns.push({ value: gugun.gugunCode, text: gugun.gugunName });
+        state.guguns.push({ value: gugun.code, text: gugun.name.substr(5) });
       });
     },
     CLEAR_SIDO_LIST(state) {
@@ -257,26 +258,23 @@ export default new Vuex.Store({
 
     ////////APT////////
     getSido({ commit }) {
-      http
-        .get(`/map/sido`)
-        .then(({ data }) => {
-          // console.log(data);
-          commit("SET_SIDO_LIST", data);
-        })
-        .catch((error) => {
-          console.log(error);
+      const url = "https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes";
+      let params = "regcode_pattern=" + "*00000000" + "&is_ignore_zero=true";
+      fetch(`${url}?${params}`)
+        .then((response) => response.json())
+        .then((data) => {
+          // console.log(data.regcodes);
+          commit("SET_SIDO_LIST", data.regcodes);
         });
     },
     getGugun({ commit }, sidoCode) {
-      const params = { sido: sidoCode };
-      http
-        .get(`/map/gugun`, { params })
-        .then(({ data }) => {
-          // console.log(commit, response);
-          commit("SET_GUGUN_LIST", data);
-        })
-        .catch((error) => {
-          console.log(error);
+      const url = "https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes";
+      let params = "regcode_pattern=" + sidoCode.substr(0, 2) + "*00000" + "&is_ignore_zero=true";
+      fetch(`${url}?${params}`)
+        .then((response) => response.json())
+        .then((data) => {
+          // console.log(data.regcodes);
+          commit("SET_GUGUN_LIST", data.regcodes);
         });
     },
     getHouseList({ commit }, option) {

@@ -1,19 +1,19 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
+import HomeView from "../views/HomeView.vue";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'main',
+    path: "/",
+    name: "main",
     // component: HomeView
   },
   {
-    path: '/board',
-    name: 'board',
-    component: () => import('@/views/AppBoard.vue'),
+    path: "/board",
+    name: "board",
+    component: () => import("@/views/AppBoard.vue"),
     redirect: "/board/list",
     children: [
       {
@@ -36,12 +36,12 @@ const routes = [
         name: "boardmodify",
         component: () => import("@/components/board/BoardModify"),
       },
-    ]
+    ],
   },
   {
-    path: '/user',
-    name: 'user',
-    component: () => import('@/views/AppUser.vue'),
+    path: "/user",
+    name: "user",
+    component: () => import("@/views/AppUser.vue"),
     redirect: "/user/login",
     children: [
       {
@@ -62,15 +62,27 @@ const routes = [
         name: "userregist",
         component: () => import("@/components/user/UserRegist"),
       },
-    ]
-  }
-
-]
+    ],
+  },
+  {
+    path: "/apt",
+    name: "apt",
+    component: () => import("@/views/AppBoard.vue"),
+    redirect: "/apt/search",
+    children: [
+      {
+        path: "search",
+        name: "aptsearch",
+        component: () => import("@/components/apt/AptSearch.vue"),
+      },
+    ],
+  },
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
