@@ -42,6 +42,19 @@ h6,
   padding: 0px 0px 0px 0px;
 }
 
+button {
+  border: none;
+  background-color: #fff;
+}
+
+input {
+  border: none;
+}
+
+input::selection {
+  border: none;
+}
+
 /**********************************************
                      start 
 ***********************************************/

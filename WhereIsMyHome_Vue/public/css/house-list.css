@@ -64,6 +64,17 @@
   margin-top: 8px;
 }
 
+<<<<<<< HEAD
+.starsvg {
+  fill: #a38f89;
+}
+
+.starsvg:hover {
+  background-color: #a38f89;
+}
+
+=======
+>>>>>>> fc77302d268b216418f799f08bfa3398646d4401
 .map {
   width: 1920px;
   height: 1080px;

@@ -14,71 +14,20 @@
       <li>서초구 {{ house.법정동 }}</li>
       <li>★신축2룸★전용15평★에어컨3대★논현동</li>
     </ul>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="16.644"
-      height="22.774"
-      viewBox="0 0 16.644 22.774"
-    >
-      <g
-        id="그룹_21"
-        data-name="그룹 21"
-        transform="translate(-4086.086 -233.5)"
+    <p class="star" @click="bookmark">
+      <svg
+        class="starsvg"
+        height="48"
+        viewBox="0 0 40 40"
+        width="40"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <line
-          id="선_16"
-          data-name="선 16"
-          x2="13.815"
-          transform="translate(4087.5 234.5)"
-          fill="none"
-          stroke="#a38f85"
-          stroke-linecap="round"
-          stroke-width="2"
+        <path
+          d="M34 6H14c-2.21 0-3.98 1.79-3.98 4L10 42l14-6 14 6V10c0-2.21-1.79-4-4-4zm0 30l-10-4.35L14 36V10h20v26z"
         />
-        <line
-          id="선_17"
-          data-name="선 17"
-          y1="20.359"
-          transform="translate(4101.315 234.5)"
-          fill="none"
-          stroke="#a38f85"
-          stroke-linecap="round"
-          stroke-width="2"
-        />
-        <line
-          id="선_18"
-          data-name="선 18"
-          y1="20.359"
-          transform="translate(4087.5 234.5)"
-          fill="none"
-          stroke="#a38f85"
-          stroke-linecap="round"
-          stroke-width="2"
-        />
-        <line
-          id="선_19"
-          data-name="선 19"
-          y1="6.908"
-          x2="6.908"
-          transform="translate(4087.5 247.952)"
-          fill="none"
-          stroke="#a38f85"
-          stroke-linecap="round"
-          stroke-width="2"
-        />
-        <line
-          id="선_20"
-          data-name="선 20"
-          x1="6.908"
-          y1="6.908"
-          transform="translate(4094.408 247.952)"
-          fill="none"
-          stroke="#a38f85"
-          stroke-linecap="round"
-          stroke-width="2"
-        />
-      </g>
-    </svg>
+        <path d="M0 0h48v48H0z" fill="none" />
+      </svg>
+    </p>
   </div>
 </template>
 
@@ -93,18 +42,22 @@ export default {
   props: {
     house: Object,
   },
-  // methods: {
-  //   ...mapActions(houseStore, ["detailHouse"]),
-  //   selectHouse() {
-  //     // console.log("listRow : ", this.house);
-  //     // this.$store.dispatch("getHouse", this.house);
-  //     this.detailHouse(this.house);
-  //   },
-  //   colorChange(flag) {
-  //     this.isColor = flag;
-  //   },
-  // },
+  methods: {
+    bookmark() {
+      let aptcode =
+        this.house.법정동 + this.house.지번 + this.house.년 + this.house.월;
+      // console.log("법정동 : " + this.house.법정동);
+      // console.log("지번" + this.house.지번);
+      // console.log("년" + this.house.년);
+      // console.log("월" + this.house.월);
+      // console.log(aptcode);
+    },
+  },
 };
 </script>
 
-<style></style>
+<style scopes>
+@import "../../../public/css/main.css";
+@import "../../../public/css/house-list.css";
+@import "../../../public/css/house-search.css";
+</style>

@@ -13,8 +13,6 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from "vuex";
-
 export default {
   name: "KakaoMap",
   data() {
@@ -61,6 +59,12 @@ export default {
       //지도 객체는 반응형 관리 대상이 아니므로 initMap에서 선언합니다.
       this.map = new kakao.maps.Map(container, options);
     },
+    changeSize(size) {
+      const container = document.getElementById("map");
+      container.style.width = `${size}px`;
+      container.style.height = `${size}px`;
+      this.map.relayout();
+    },
     displayMarker(markerPositions) {
       if (this.markers.length > 0) {
         this.markers.forEach((marker) => marker.setMap(null));
@@ -104,11 +108,9 @@ export default {
         content: iwContent,
         removable: iwRemoveable,
       });
+
       this.map.setCenter(iwPosition);
     },
-  },
-  computed: {
-    ...mapState(["houses"]),
   },
 };
 </script>
@@ -116,8 +118,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #map {
-  width: 1000px;
-  height: 1000px;
+  width: 400px;
+  height: 400px;
 }
 
 .button-group {
