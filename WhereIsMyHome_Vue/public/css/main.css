@@ -1,0 +1,103 @@
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+body {
+  /*font-family: "Open Sans", sans-serif;*/
+  font-family: "Pretendard-Regular";
+  color: #444444;
+  position: relative;
+  height: 1080px;
+  overflow: scroll;
+}
+
+a {
+  text-decoration: none;
+  color: #fd680e;
+}
+
+a:hover {
+  color: #ff8f4c;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-primary {
+  font-family: "Raleway", sans-serif;
+}
+
+.navbar {
+  padding: 0px 0px 0px 0px;
+}
+
+button {
+  border: none;
+  background-color: #fff;
+}
+
+input {
+  border: none;
+}
+
+input::selection {
+  border: none;
+}
+
+/**********************************************
+                     start 
+***********************************************/
+
+.con {
+  top: 0px;
+  left: 0px;
+  width: 970px;
+  height: 100%;
+  background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  opacity: 1;
+  /*margin-left: 90px !important;
+  margin-right: 90px !important;*/
+  margin: auto 90px;
+  /*position: absolute;*/
+}
+
+.header {
+  height: 76px;
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 0.5px solid #a38f85;
+  opacity: 1px;
+  /* border: 1px solid; */
+  /* border-color: black; */
+}
+
+.textSet {
+  text-align: center;
+  line-height: 60px;
+}
+
+.logo {
+  position: absolute;
+  top: 19px;
+  left: 76px;
+  width: 180px;
+  height: 67px;
+  transform: matrix(1, 0, 0, 1, 0, 0);
+  background: var(--unnamed-color-ede9e3) 0% 0% no-repeat padding-box;
+  /* background: #EDE9E3 0% 0% no-repeat padding-box; */
+  opacity: 1;
+  text-align: center;
+  line-height: 60px;
+}
