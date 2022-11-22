@@ -318,7 +318,7 @@ export default new Vuex.Store({
             option.year.substr(0, option.year.length - 1) +
             option.month.substr(0, option.month.length - 1),
           serviceKey: decodeURIComponent(SERVICE_KEY),
-          numOfRows: 50,
+          numOfRows: 20,
         };
         http
           .get(SERVICE_URL, { params })
