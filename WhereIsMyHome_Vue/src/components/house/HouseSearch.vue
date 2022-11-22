@@ -7,75 +7,82 @@
     />
 
     <!-- v-model houseType-->
-    <div class="btn-group group"></div>
-    <div class="apt" @click="houseType = `apt`">아파트</div>
-    <div class="selectBuild" @click="houseType = `ot`">원룸, 투룸</div>
-    <div class="selectBuild2" @click="houseType = `villa`">빌라</div>
+    <div class="group">
+      <button class="apt" @click="houseType = `apt`">아파트</button>
+      <button class="selectBuild" @click="houseType = `ot`">원룸, 투룸</button>
+      <button class="selectBuild2" @click="houseType = `villa`">빌라</button>
+    </div>
 
     <!-- v-model dealType-->
     <div class="typeText">거래유형</div>
-    <div class="inner1 inner" @click="dealType = `done`">완료</div>
-    <div class="inner2" @click="dealType = `on`">실거래</div>
-    <div class="inner3 inner" @click="dealType = `all`">전체</div>
+    <button class="inner1 inner" @click="dealType = `done`">완료</button>
+    <button class="inner2" @click="dealType = `on`">실거래</button>
+    <button class="inner3 inner" @click="dealType = `all`">전체</button>
 
-    <b-form-select
-      v-model="sidoCode"
-      :options="sidos"
-      @change="gugunList"
-      class="form-select form-select-sm sido sido1"
-    ></b-form-select>
-    <b-form-select
-      v-model="gugunCode"
-      :options="guguns"
-      class="form-select form-select-sm sido sido2"
-    ></b-form-select>
-    <select
-      class="form-select form-select-sm sido sido3"
-      label
-      for="시/도"
-      v-model="year"
-    >
-      <option>2014년</option>
-      <option>2015년</option>
-      <option>2016년</option>
-      <option>2017년</option>
-      <option>2018년</option>
-      <option>2019년</option>
-      <option>2020년</option>
-      <option>2021년</option>
-      <option>2022년</option>
-    </select>
-    <select
-      class="form-select form-select-sm sido sido4"
-      label
-      for="시/도"
-      v-model="month"
-    >
-      <option>01월</option>
-      <option>02월</option>
-      <option>03월</option>
-      <option>04월</option>
-      <option>05월</option>
-      <option>06월</option>
-      <option>07월</option>
-      <option>08월</option>
-      <option>09월</option>
-      <option>10월</option>
-      <option>11월</option>
-      <option>12월</option>
-    </select>
+    <div class="selectBox">
+      <b-form-select
+        v-model="sidoCode"
+        :options="sidos"
+        @change="gugunList"
+        class="form-select form-select-sm sido sido1"
+      ></b-form-select>
+      <b-form-select
+        v-model="gugunCode"
+        :options="guguns"
+        class="form-select form-select-sm sido sido2"
+      ></b-form-select>
+      <select
+        class="form-select form-select-sm sido sido3"
+        label
+        for="시/도"
+        v-model="year"
+      >
+        <option>2014년</option>
+        <option>2015년</option>
+        <option>2016년</option>
+        <option>2017년</option>
+        <option>2018년</option>
+        <option>2019년</option>
+        <option>2020년</option>
+        <option>2021년</option>
+        <option>2022년</option>
+      </select>
+      <select
+        class="form-select form-select-sm sido sido4"
+        label
+        for="시/도"
+        v-model="month"
+      >
+        <option>01월</option>
+        <option>02월</option>
+        <option>03월</option>
+        <option>04월</option>
+        <option>05월</option>
+        <option>06월</option>
+        <option>07월</option>
+        <option>08월</option>
+        <option>09월</option>
+        <option>10월</option>
+        <option>11월</option>
+        <option>12월</option>
+      </select>
+    </div>
 
     <div class="typeText2">거래금액</div>
 
     <!-- <div class="range">
       <input type="range" class="form-range" id="customRange" />
     </div> -->
-    <input placeholder="최소금액" v-model="priceMin" />
-    <input placeholder="최대금액" v-model="priceMax" />
+    <div class="priceBox">
+      <input placeholder="최소금액" v-model="priceMin" />
+      <input placeholder="최대금액" v-model="priceMax" />
+    </div>
 
     <div class="typeText3">전체해제</div>
 
-    <button @click="searchApt">검색</button>
+    <button @click="searchApt" type="button" class="searchBtn textSet">
+      검색
+    </button>
     <!-- <div class="searchBtn textSet">검색</div> -->
   </div>
 </template>

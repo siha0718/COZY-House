@@ -15,7 +15,7 @@ body {
   color: #444444;
   position: relative;
   height: 1080px;
-  overflow: hidden;
+  overflow: scroll;
 }
 
 a {
@@ -40,6 +40,19 @@ h6,
 
 .navbar {
   padding: 0px 0px 0px 0px;
+}
+
+button {
+  border: none;
+  background-color: #fff;
+}
+
+input {
+  border: none;
+}
+
+input::selection {
+  border: none;
 }
 
 /**********************************************
