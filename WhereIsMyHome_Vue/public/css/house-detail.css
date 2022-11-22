@@ -39,31 +39,21 @@
 .areaList {
   /*display: flex;*/
 }
-.list {
-  margin-top: 30px;
-  display: flex;
+li{
+  margin: 10x;
 }
-
-.list img {
-  width: 200px;
-  height: 150px;
-  border-radius: 20px;
+li::marker{
+  color: #ff8f4c;
+  font-size: xx-large;
+  font-weight: bold;
 }
-
-.list ul {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
+.infoList{
+  margin: auto;
+  font-size: large;
 }
-
-.list ul > li {
-  list-style: none;
+hr{
+  background-color: #ff8f4c;
 }
-
-.list ul > li:not(:nth-child(1)) {
-  margin-top: 8px;
-}
-
 .map {
   width: 1920px;
   height: 1080px;

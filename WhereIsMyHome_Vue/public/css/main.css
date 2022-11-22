@@ -15,7 +15,7 @@ body {
   color: #444444;
   position: relative;
   height: 1080px;
-  overflow: hidden;
+  overflow: scroll;
 }
 
 a {
