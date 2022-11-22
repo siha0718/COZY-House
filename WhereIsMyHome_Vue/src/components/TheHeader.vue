@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-sm">
     <div class="container-fluid header">
-      <a class="navbar-brand logo" href="#">LOGO</a>
+      <router-link class="navbar-brand logo" :to="'/'">LOGO</router-link>
       <button
         class="navbar-toggler"
         type="button"
@@ -26,12 +26,23 @@
           </li>
         </ul>
       </div>
-      <ul class="navbar-nav">
+      <ul class="navbar-nav" v-if="loginUser">
         <li class="nav-item justify-content-end">
-          <a class="nav-link" href="#">로그인</a>
+          <router-link class="nav-link" :to="'/user/detail'">회원수정</router-link>
+        </li>
+
+        <li class="nav-item justify-content-end">
+          <a class="nav-link" @click="logout">로그아웃</a>
+          <!-- <div class="nav-link" @click="logout">로그아웃</div> -->
+          <!-- <router-link class="nav-link" @click="logout">로그아웃</router-link> -->
+        </li>
+      </ul>
+      <ul class="navbar-nav" v-else>
+        <li class="nav-item justify-content-end">
+          <router-link class="nav-link" :to="'/user/login'">로그인</router-link>
         </li>
         <li class="nav-item justify-content-end">
-          <a class="nav-link" href="#">회원가입</a>
+          <router-link class="nav-link" :to="'/user/regist'">회원가입</router-link>
         </li>
       </ul>
     </div>
@@ -39,8 +50,18 @@
 </template>
 
 <script>
+import { mapState, mapActions, mapMutations } from "vuex";
 export default {
   name: "TheHeader",
+  computed: {
+    ...mapState(["loginUser"]),
+    ...mapMutations(["DELETE_LOGIN_USER"]),
+  },
+  methods: {
+    logout() {
+      this.DELETE_LOGIN_USER;
+    },
+  },
 };
 </script>
 <style scoped>

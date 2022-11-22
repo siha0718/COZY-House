@@ -20,7 +20,7 @@
 	<insert id="regist" parameterType="UserDto">
 		INSERT INTO user
 		(userid, userpwd, username, useremail,userclass)
-		VALUES(#{userid}, #{userpwd}, #{username}, #{email}, #{userclass})
+		VALUES(#{userid}, #{userpwd}, #{username}, #{useremail}, #{userclass})
 	</insert>
 	
 	<!-- 로그인  -->

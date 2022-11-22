@@ -7,11 +7,10 @@ import http from "@/api/http";
 Vue.use(Vuex);
 // import boardStore from '@/store/modules/boardStore.js'
 
-const API_USER_URL = `http://localhost:9999/vue/user`;
-const API_BOARD_URL = `http://localhost:9999/vue/board`;
-const API_APT_URL = `http://localhost:9999/vue/apt`;
-const CODE_URL =
-  "https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes";
+const API_USER_URL = `http://localhost:9999/home/user`;
+const API_BOARD_URL = `http://localhost:9999/home/board`;
+const API_APT_URL = `http://localhost:9999/home/apt`;
+const CODE_URL = "https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes";
 
 export default new Vuex.Store({
   state: {
@@ -28,7 +27,7 @@ export default new Vuex.Store({
   },
   getters: {
     loginUser(state) {
-      console.log(state.loginUser);
+      // console.log(state.loginUser);
       return state.loginUser;
     },
     ////////BOARD////////
@@ -41,9 +40,11 @@ export default new Vuex.Store({
   },
   mutations: {
     SET_LOGIN_USER(state, user) {
+      console.log(user);
       state.loginUser = user;
     },
     DELETE_LOGIN_USER(state) {
+      console.log("뮤테이션 딜리트 실행");
       state.loginUser = null;
     },
     ////////BOARD////////
@@ -112,7 +113,7 @@ export default new Vuex.Store({
       console.log(user);
       axios({
         url: API_USER_URL + `/regist`,
-        method: "post",
+        method: "POST",
         data: user,
       })
         .then((res) => {
@@ -138,6 +139,7 @@ export default new Vuex.Store({
       })
         .then((res) => {
           // console.log(res.data.msg);
+          // console.log(res.data.user);
           if (res.data.msg == "success") {
             alert("로그인 성공!");
             // console.log("action"+user.userid);
@@ -160,7 +162,7 @@ export default new Vuex.Store({
         data: user,
       })
         .then((res) => {
-          if (res.msg == "success") {
+          if (res.data.msg == "success") {
             alert("수정 성공!");
             commit("SET_LOGIN_USER", user);
             router.push("/user/detail");
@@ -174,19 +176,22 @@ export default new Vuex.Store({
         });
     },
     //회원탈퇴
-    deleteUser: function ({ commit }, user) {
+    deleteUser: function ({ commit, state }) {
+      console.log("액션 딜리트 들어옴");
+      console.log(state.loginUser);
       axios({
         url: API_USER_URL,
         method: "DELETE",
-        data: user,
+        data: state.loginUser,
       })
         .then((res) => {
-          if (res == 1) {
+          if (res.data.msg == "success") {
             alert("삭제 완료!");
             commit("DELETE_LOGIN_USER");
             router.push("/");
           } else {
             alert("삭제 실패");
+            console.log(res.data.msg);
             router.push("/user/detail");
           }
         })
@@ -259,8 +264,7 @@ export default new Vuex.Store({
 
     ////////APT////////
     getSido({ commit }) {
-      const url =
-        "https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes";
+      const url = "https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes";
       let params = "regcode_pattern=" + "*00000000" + "&is_ignore_zero=true";
       fetch(`${url}?${params}`)
         .then((response) => response.json())
@@ -270,13 +274,8 @@ export default new Vuex.Store({
         });
     },
     getGugun({ commit }, sidoCode) {
-      const url =
-        "https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes";
-      let params =
-        "regcode_pattern=" +
-        sidoCode.substr(0, 2) +
-        "*00000" +
-        "&is_ignore_zero=true";
+      const url = "https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes";
+      let params = "regcode_pattern=" + sidoCode.substr(0, 2) + "*00000" + "&is_ignore_zero=true";
       fetch(`${url}?${params}`)
         .then((response) => response.json())
         .then((data) => {
