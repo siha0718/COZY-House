@@ -10,7 +10,8 @@ Vue.use(Vuex);
 const API_USER_URL = `http://localhost:9999/home/user`;
 const API_BOARD_URL = `http://localhost:9999/home/board`;
 const API_APT_URL = `http://localhost:9999/home/apt`;
-const CODE_URL = "https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes";
+const API_STAR_URL = `http://localhost:9999/home/star`;
+const API_COMMNET_URL = `http://localhost:9999/home/comment`;
 
 export default new Vuex.Store({
   state: {
@@ -28,6 +29,8 @@ export default new Vuex.Store({
     ////////STAR////////
     starList: [],
     star: {},
+    ////////COMMENT////////
+    commentList: {},
   },
   getters: {
     loginUser(state) {
@@ -111,11 +114,22 @@ export default new Vuex.Store({
       // console.log("Mutations", house);
       state.house = house;
     },
-    GET_USER_STARS(state, starList) {
+    SET_USER_STARS(state, starList) {
       state.starList = starList;
     },
     ADD_USER_STARS(state, star) {
       state.starList.push(star);
+    },
+    DELETE_USER_STARS(state, star) {
+      for (let i = 0; i < state.starList.length; i++) {
+        if (state.starList[i].houseCode == star.houseCode) {
+          state.starList.splice(i, 1);
+          break;
+        }
+      }
+    },
+    SET_COMMENT_LIST(state, commentList) {
+      state.commentList = commentList;
     },
   },
   actions: {
@@ -503,7 +517,7 @@ export default new Vuex.Store({
       })
         .then((res) => {
           if (res.data.msg == "success") {
-            commit("GET_USER_STARS", res.data.starList);
+            commit("SET_USER_STARS", res.data.starList);
           } else {
             alert("스타 불러오기 실패");
             router.push("/");
@@ -513,18 +527,92 @@ export default new Vuex.Store({
           console.log(err);
         });
     },
-    addStars: function ({ commit, state }, star) {
+    addStar: function ({ commit, state }, star) {
       axios({
         url: API_STAR_URL,
         method: "post",
         data: star,
-        params: params,
       })
         .then((res) => {
           if (res.data.msg == "success") {
             commit("ADD_USER_STARS", star);
           } else {
             alert("스타 추가 실패");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    deleteStar: function ({ commit, state }, star) {
+      axios({
+        url: API_STAR_URL,
+        method: "delete",
+        data: star,
+        params: params,
+      })
+        .then((res) => {
+          if (res.data.msg == "success") {
+            commit("DELETE_USER_STARS", star);
+          } else {
+            alert("스타 추가 실패");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+
+    ///////////////comment////////////////////////
+    addComment: function ({ commit, state }, comment) {
+      axios({
+        url: API_COMMNET_URL,
+        method: "post",
+        data: comment,
+      })
+        .then((res) => {
+          if (res.data.msg == "success") {
+            alert("댓글 작성 성공");
+          } else {
+            alert("댓글 작성 실패");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    modifyComment: function ({ commit, state }, comment) {
+      //cmNum 을 찾아서 content만 바꿈
+      axios({
+        url: API_COMMNET_URL,
+        method: "put",
+        data: comment,
+      })
+        .then((res) => {
+          if (res.data.msg == "success") {
+            alert("댓글 수정 성공");
+          } else {
+            alert("댓글 수정 실패");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getCommentList: function ({ commit, state }, houseCode) {
+      //houseCode 와 userid가 일치하는거 가져옴
+      let params = {
+        houseCode: houseCode,
+        userid: state.loginUser.userid,
+      };
+      axios({
+        url: API_COMMNET_URL,
+        method: "get",
+        params: params,
+      })
+        .then((res) => {
+          if (res.data.msg == "success") {
+            commit("SET_COMMENT_LIST", res.data.commentList);
           }
         })
         .catch((err) => {
