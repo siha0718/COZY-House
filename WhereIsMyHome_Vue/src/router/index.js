@@ -1,7 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import HomeView from "../views/HomeView.vue";
-
+import AppHouse from "@/views/AppHouse.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -65,15 +64,19 @@ const routes = [
     ],
   },
   {
-    path: "/apt",
-    name: "apt",
-    component: () => import("@/views/AppBoard.vue"),
-    redirect: "/apt/search",
+    path: "/house",
+    name: "house",
+    component: AppHouse,
     children: [
       {
-        path: "search",
-        name: "aptsearch",
-        component: () => import("@/components/apt/AptSearch.vue"),
+        path: "list",
+        name: "houselist",
+        component: () => import("@/components/house/HouseList"),
+      },
+      {
+        path: "detail",
+        name: "housedetail",
+        component: () => import("@/components/house/HouseDetail"),
       },
     ],
   },

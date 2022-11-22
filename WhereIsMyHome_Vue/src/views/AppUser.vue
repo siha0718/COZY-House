@@ -1,18 +1,14 @@
 <template>
   <div class="user">
-      <router-view></router-view>
-    </div>
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'AppUser',
-    components: {
-      
-    }
-}
+  name: "AppUser",
+  components: {},
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
