@@ -10,7 +10,14 @@
         viewBox="0 0 96 96"
       >
         <defs>
-          <filter id="타원_13" x="0" y="0" width="96" height="96" filterUnits="userSpaceOnUse">
+          <filter
+            id="타원_13"
+            x="0"
+            y="0"
+            width="96"
+            height="96"
+            filterUnits="userSpaceOnUse"
+          >
             <feOffset dx="5" input="SourceAlpha" />
             <feGaussianBlur stdDeviation="5" result="blur" />
             <feFlood flood-opacity="0.439" />
@@ -18,8 +25,15 @@
             <feComposite in="SourceGraphic" />
           </filter>
         </defs>
-        <g id="그룹_4" data-name="그룹 4" transform="translate(-1379.364 -574.364)">
-          <g transform="matrix(1, 0, 0, 1, 1379.36, 574.36)" filter="url(#타원_13)">
+        <g
+          id="그룹_4"
+          data-name="그룹 4"
+          transform="translate(-1379.364 -574.364)"
+        >
+          <g
+            transform="matrix(1, 0, 0, 1, 1379.36, 574.36)"
+            filter="url(#타원_13)"
+          >
             <circle
               id="타원_13-2"
               data-name="타원 13"
@@ -48,9 +62,15 @@
     <!-- 오른쪽 선택 화면  -->
     <div class="right active">
       <div class="rightSelect col-md-4">
-        <h5 class="areaTitle">지역 목록</h5>
+        <h5 class="areaTitle" @click="test">지역 목록</h5>
 
-        <div class="areaList">
+        <div class="areaList" v-if="houses && houses.length != 0">
+          <house-list-item
+            v-for="(house, index) in houses"
+            :key="index"
+            :house="house"
+          />
+          <!--
           <div class="list">
             <img src="img/화면 캡처 2022-11-22 022838.png" alt="" />
             <ul>
@@ -410,7 +430,8 @@
               </g>
             </svg>
           </div>
-        </div>
+        --></div>
+        <div class="areaList" v-else>매물이 존재하지 않습니다.</div>
       </div>
     </div>
   </div>
@@ -418,15 +439,24 @@
 
 <script>
 import { mapState, mapActions, mapMutations } from "vuex";
+import HouseListItem from "@/components/house/HouseListItem.vue";
 
 export default {
   name: "HouseList",
-  components: {},
+  components: {
+    HouseListItem,
+  },
   data() {
     return {};
   },
   computed: {
     ...mapState(["houses"]),
+  },
+  methods: {
+    test() {
+      console.log("하우스 사이즈는");
+      console.log(this.houses);
+    },
   },
 };
 </script>
