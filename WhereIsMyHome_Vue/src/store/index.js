@@ -10,10 +10,12 @@ Vue.use(Vuex);
 const API_USER_URL = `http://localhost:9999/home/user`;
 const API_BOARD_URL = `http://localhost:9999/home/board`;
 const API_APT_URL = `http://localhost:9999/home/apt`;
+const API_STAR_URL = `http://localhost:9999/home/star`;
 const CODE_URL = "https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes";
 
 export default new Vuex.Store({
   state: {
+    ////////USER////////
     user: {},
     loginUser: null,
     ////////BOARD////////
@@ -24,6 +26,9 @@ export default new Vuex.Store({
     guguns: [{ value: null, text: "선택하세요" }],
     houses: [],
     house: null,
+    ////////STAR////////
+    starList: [],
+    star: {},
   },
   getters: {
     loginUser(state) {
@@ -105,6 +110,12 @@ export default new Vuex.Store({
     SET_DETAIL_HOUSE(state, house) {
       // console.log("Mutations", house);
       state.house = house;
+    },
+    GET_USER_STARS(state, starList) {
+      state.starList = starList;
+    },
+    ADD_USER_STARS(state, star) {
+      state.starList.push(star);
     },
   },
   actions: {
@@ -474,44 +485,52 @@ export default new Vuex.Store({
             console.log(err);
           });
       }
-
-      //데이터 필터
-      // for (let i = 0; i < house_list.length; i++) {
-      //   if (option.inputSearch) {
-      //     if (!house_list[i].includes(option.inputSearch)) {
-      //       //delete
-      //       house_list.splice(i, 1);
-      //       i--;
-      //       break;
-      //     }
-      //   }
-      //   if (option.priceMin) {
-      //     if (house_list[i].거래금액 < option.priceMin) {
-      //       //delete
-      //       house_list.splice(i, 1);
-      //       i--;
-      //       break;
-      //     }
-      //   }
-      //   if (option.priceMax) {
-      //     if (house_list[i].거래금액 > option.priceMax) {
-      //       //delete
-      //       house_list.splice(i, 1);
-      //       i--;
-      //       break;
-      //     }
-      //   }
-      // }
-      // //dddddddddddd여기확인
-      // console.log("액션에서 걸러진 house list는");
-      // console.log(house_list);
-
-      // commit("SET_HOUSE_LIST", house_list);
     },
     detailHouse({ commit }, house) {
       // 나중에 house.일련번호를 이용하여 API 호출
       // console.log(commit, house);
       commit("SET_DETAIL_HOUSE", house);
+    },
+
+    ///////////////bookmark////////////////////////
+    getStars: function ({ commit, state }) {
+      let params = {
+        userid: state.loginUser.userid,
+      };
+      axios({
+        url: API_STAR_URL,
+        method: "get",
+        params: params,
+      })
+        .then((res) => {
+          if (res.data.msg == "success") {
+            commit("GET_USER_STARS", res.data.starList);
+          } else {
+            alert("스타 불러오기 실패");
+            router.push("/");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    addStars: function ({ commit, state }, star) {
+      axios({
+        url: API_STAR_URL,
+        method: "post",
+        data: star,
+        params: params,
+      })
+        .then((res) => {
+          if (res.data.msg == "success") {
+            commit("ADD_USER_STARS", star);
+          } else {
+            alert("스타 추가 실패");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
   modules: {},
