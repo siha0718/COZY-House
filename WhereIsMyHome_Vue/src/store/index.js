@@ -7,9 +7,9 @@ import http from "@/api/http";
 Vue.use(Vuex);
 // import boardStore from '@/store/modules/boardStore.js'
 
-const API_USER_URL = `http://localhost:9999/vue/user`;
-const API_BOARD_URL = `http://localhost:9999/vue/board`;
-const API_APT_URL = `http://localhost:9999/vue/apt`;
+const API_USER_URL = `http://localhost:9999/home/user`;
+const API_BOARD_URL = `http://localhost:9999/home/board`;
+const API_APT_URL = `http://localhost:9999/home/apt`;
 const CODE_URL = "https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes";
 
 export default new Vuex.Store({
@@ -27,7 +27,7 @@ export default new Vuex.Store({
   },
   getters: {
     loginUser(state) {
-      console.log(state.loginUser);
+      // console.log(state.loginUser);
       return state.loginUser;
     },
     ////////BOARD////////
@@ -40,9 +40,11 @@ export default new Vuex.Store({
   },
   mutations: {
     SET_LOGIN_USER(state, user) {
+      console.log(user);
       state.loginUser = user;
     },
     DELETE_LOGIN_USER(state) {
+      console.log("뮤테이션 딜리트 실행");
       state.loginUser = null;
     },
     ////////BOARD////////
@@ -111,7 +113,7 @@ export default new Vuex.Store({
       console.log(user);
       axios({
         url: API_USER_URL + `/regist`,
-        method: "post",
+        method: "POST",
         data: user,
       })
         .then((res) => {
@@ -137,6 +139,7 @@ export default new Vuex.Store({
       })
         .then((res) => {
           // console.log(res.data.msg);
+          // console.log(res.data.user);
           if (res.data.msg == "success") {
             alert("로그인 성공!");
             // console.log("action"+user.userid);
@@ -159,7 +162,7 @@ export default new Vuex.Store({
         data: user,
       })
         .then((res) => {
-          if (res.msg == "success") {
+          if (res.data.msg == "success") {
             alert("수정 성공!");
             commit("SET_LOGIN_USER", user);
             router.push("/user/detail");
@@ -173,19 +176,22 @@ export default new Vuex.Store({
         });
     },
     //회원탈퇴
-    deleteUser: function ({ commit }, user) {
+    deleteUser: function ({ commit, state }) {
+      console.log("액션 딜리트 들어옴");
+      console.log(state.loginUser);
       axios({
         url: API_USER_URL,
         method: "DELETE",
-        data: user,
+        data: state.loginUser,
       })
         .then((res) => {
-          if (res == 1) {
+          if (res.data.msg == "success") {
             alert("삭제 완료!");
             commit("DELETE_LOGIN_USER");
             router.push("/");
           } else {
             alert("삭제 실패");
+            console.log(res.data.msg);
             router.push("/user/detail");
           }
         })
@@ -282,7 +288,10 @@ export default new Vuex.Store({
       //.env.local file 생성.
       // 반드시 VUE_APP으로 시작해야 한다.
       //매매 완료정보 (공공 API)
-      let house_list;
+      // console.log("aciton");
+      // console.log(option);
+
+      let house_list = [];
       if (option.dealType == "done" || "all") {
         let SERVICE_KEY;
         let SERVICE_URL;
@@ -303,24 +312,111 @@ export default new Vuex.Store({
             break;
         }
         const params = {
-          LAWD_CD: option.gugunCode,
-          DEAL_YMD: option.year + option.month,
+          LAWD_CD: option.gugunCode.substr(0, 5),
+          DEAL_YMD:
+            option.year.substr(0, option.year.length - 1) +
+            option.month.substr(0, option.month.length - 1),
           serviceKey: decodeURIComponent(SERVICE_KEY),
+          numOfRows: 20,
         };
         http
           .get(SERVICE_URL, { params })
           .then(({ data }) => {
-            // console.log(data);
-            house_list.push(data.response.body.items.item);
-            //console.log(house_list);
-            // commit("SET_HOUSE_LIST", data.response.body.items.item);
+            house_list = Object.values(data.response.body.items.item);
+
+            if (option.dealType == "all") {
+              let db_param;
+              switch (option.houseType) {
+                //아파트 검색
+                case "apt":
+                  db_param = "apt";
+                  break;
+                //빌라(연립)
+                case "villa":
+                  db_param = "villa";
+                  break;
+                //원룸,투룸
+                default:
+                  db_param = "ot";
+                  break;
+              }
+              axios({
+                url: API_APT_URL,
+                method: "get",
+                params: {
+                  houseType: db_param,
+                },
+              })
+                .then((res) => {
+                  // console.log(res);
+                  house_list.push(res.data.list);
+                  for (let i = 0; i < house_list.length; i++) {
+                    if (option.inputSearch) {
+                      if (!house_list[i].includes(option.inputSearch)) {
+                        //delete
+                        house_list.splice(i, 1);
+                        i--;
+                        break;
+                      }
+                    }
+                    if (option.priceMin) {
+                      if (house_list[i].거래금액 < option.priceMin) {
+                        //delete
+                        house_list.splice(i, 1);
+                        i--;
+                        break;
+                      }
+                    }
+                    if (option.priceMax) {
+                      if (house_list[i].거래금액 > option.priceMax) {
+                        //delete
+                        house_list.splice(i, 1);
+                        i--;
+                        break;
+                      }
+                    }
+                  }
+                  commit("SET_HOUSE_LIST", house_list);
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            } else {
+              for (let i = 0; i < house_list.length; i++) {
+                if (option.inputSearch) {
+                  if (!house_list[i].includes(option.inputSearch)) {
+                    //delete
+                    house_list.splice(i, 1);
+                    i--;
+                    break;
+                  }
+                }
+                if (option.priceMin) {
+                  if (house_list[i].거래금액 < option.priceMin) {
+                    //delete
+                    house_list.splice(i, 1);
+                    i--;
+                    break;
+                  }
+                }
+                if (option.priceMax) {
+                  if (house_list[i].거래금액 > option.priceMax) {
+                    //delete
+                    house_list.splice(i, 1);
+                    i--;
+                    break;
+                  }
+                }
+              }
+              commit("SET_HOUSE_LIST", house_list);
+            }
           })
           .catch((error) => {
             console.log(error);
           });
       }
       //업자 매물 (디비 rest API)
-      else if (option.dealType == "on" || "all") {
+      else if (option.dealType == "on") {
         let db_param;
         switch (option.houseType) {
           //아파트 검색
@@ -346,6 +442,33 @@ export default new Vuex.Store({
           .then((res) => {
             // console.log(res);
             house_list.push(res.data.list);
+            for (let i = 0; i < house_list.length; i++) {
+              if (option.inputSearch) {
+                if (!house_list[i].includes(option.inputSearch)) {
+                  //delete
+                  house_list.splice(i, 1);
+                  i--;
+                  break;
+                }
+              }
+              if (option.priceMin) {
+                if (house_list[i].거래금액 < option.priceMin) {
+                  //delete
+                  house_list.splice(i, 1);
+                  i--;
+                  break;
+                }
+              }
+              if (option.priceMax) {
+                if (house_list[i].거래금액 > option.priceMax) {
+                  //delete
+                  house_list.splice(i, 1);
+                  i--;
+                  break;
+                }
+              }
+            }
+            commit("SET_HOUSE_LIST", house_list);
           })
           .catch((err) => {
             console.log(err);
@@ -353,15 +476,37 @@ export default new Vuex.Store({
       }
 
       //데이터 필터
-      for (let i = 0; i < house_list.length; i++) {
-        if (option.inputSearch) {
-        }
-        if (option.priceMin) {
-        }
-        if (option.priceMax) {
-        }
-      }
-      commit("SET_HOUSE_LIST", house_list);
+      // for (let i = 0; i < house_list.length; i++) {
+      //   if (option.inputSearch) {
+      //     if (!house_list[i].includes(option.inputSearch)) {
+      //       //delete
+      //       house_list.splice(i, 1);
+      //       i--;
+      //       break;
+      //     }
+      //   }
+      //   if (option.priceMin) {
+      //     if (house_list[i].거래금액 < option.priceMin) {
+      //       //delete
+      //       house_list.splice(i, 1);
+      //       i--;
+      //       break;
+      //     }
+      //   }
+      //   if (option.priceMax) {
+      //     if (house_list[i].거래금액 > option.priceMax) {
+      //       //delete
+      //       house_list.splice(i, 1);
+      //       i--;
+      //       break;
+      //     }
+      //   }
+      // }
+      // //dddddddddddd여기확인
+      // console.log("액션에서 걸러진 house list는");
+      // console.log(house_list);
+
+      // commit("SET_HOUSE_LIST", house_list);
     },
     detailHouse({ commit }, house) {
       // 나중에 house.일련번호를 이용하여 API 호출

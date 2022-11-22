@@ -7,18 +7,18 @@ public class UserDto {
 	private String userid; // 아이디
 	private String userpwd; // 비밀번호
 	private String username; // 이름
-	private String email;// 주소
+	private String useremail;// 주소
 	private String joindate; // 전화번호
 	private int userclass;
 	
 	public UserDto() {
 	}
-	public UserDto(String userid, String userpwd, String username, String email, String joindate, int userclass) {
+	public UserDto(String userid, String userpwd, String username, String useremail, String joindate, int userclass) {
 		super();
 		this.userid = userid;
 		this.userpwd = userpwd;
 		this.username = username;
-		this.email = email;
+		this.useremail = useremail;
 		this.joindate = joindate;
 		this.userclass = userclass;
 	}
@@ -40,11 +40,11 @@ public class UserDto {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getEmail() {
-		return email;
+	public String getUseremail() {
+		return useremail;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUseremail(String email) {
+		this.useremail = email;
 	}
 	public String getJoindate() {
 		return joindate;
@@ -60,7 +60,7 @@ public class UserDto {
 	}
 	@Override
 	public String toString() {
-		return "UserDto [userid=" + userid + ", userpwd=" + userpwd + ", username=" + username + ", email=" + email
+		return "UserDto [userid=" + userid + ", userpwd=" + userpwd + ", username=" + username + ", useremail=" + useremail
 				+ ", joindate=" + joindate + ", userclass=" + userclass + "]";
 	}
 	

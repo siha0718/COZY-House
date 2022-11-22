@@ -41,7 +41,6 @@ const routes = [
     path: "/user",
     name: "user",
     component: () => import("@/views/AppUser.vue"),
-    redirect: "/user/login",
     children: [
       {
         // login

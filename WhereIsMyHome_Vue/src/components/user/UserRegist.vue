@@ -1,66 +1,63 @@
 <template>
-  <div>
-    <form action="" id="form-join" class="joinForm">
-      <input type="hidden" name="action" value="join">                                                                                     
-        <h2>회원가입</h2>
-        <div class="textForm">
-          <input v-model="userid" name="userid" id="userId" type="text" class="id" placeholder="아이디">
-        </div>
-        <div class="textForm">
-          <input v-model="userpwd" name="password" id="userPwd" type="password" class="pw" placeholder="비밀번호">
-        </div>
-        <div class="textForm">
-          <input v-model="username" name="username" id="userName" type="text" class="name" placeholder="이름">
-        </div>
-        <div class="textForm">
-          <input v-model="email" name="email" id="email" type="text" class="email" placeholder="이메일">
-        </div>      
-        <button @click.self.prevent="regist" id="btn-join" class="btn">J O I N</button>
-    </form>
+  <div action="" id="form-join" class="joinForm">
+    <h2>회원가입</h2>
+    <div class="textForm">
+      <input
+        name="userid"
+        id="userId"
+        type="text"
+        class="id"
+        v-model="user.userid"
+        placeholder="아이디"
+      />
+    </div>
+    <div class="textForm">
+      <input name="userpwd" id="userPwd" type="password" class="pw" v-model="user.userpwd" />
+    </div>
+    <div class="textForm">
+      <input name="username" id="userName" type="text" class="name" v-model="user.username" />
+    </div>
+    <div class="textForm">
+      <input name="email" id="email" type="text" class="email" v-model="user.useremail" />
+    </div>
+
+    <input type="submit" id="btn-join" class="btn" value="J O I N" @click="doRegist" />
   </div>
 </template>
 
-
 <script>
-
 import { mapActions } from "vuex";
 import axios from "axios";
 
 export default {
-  name: "UserList",
+  name: "UserRegist",
   data() {
     return {
-      userid: "",
-      userpwd: "",
-      username: "",
-      email: "",
+      user: {
+        userid: "",
+        userpwd: "",
+        username: "",
+        useremail: "",
+      },
     };
   },
   methods: {
-    regist() {
+    doRegist() {
       if (
-        this.userid === "" ||
-        this.userpwd === "" ||
-        this.username === "" ||
-        this.email === ""
+        this.user.userid === "" ||
+        this.user.userpwd === "" ||
+        this.user.username === "" ||
+        this.user.useremail === ""
       ) {
         alert("모든 내용을 입력해주세요");
         return;
       }
-
-      let user = {
-        userid: this.userid,
-        userpwd: this.userpwd,
-        username: this.username,
-        email: this.email
-      };
-      this.$store.dispatch("userStore/createUser", user);
+      this.$store.dispatch("createUser", this.user);
     },
   },
-
-}
+};
 </script>
 
-<style>
-
+<style scoped>
+@import "../../../public/css/user-regist.css";
 </style>

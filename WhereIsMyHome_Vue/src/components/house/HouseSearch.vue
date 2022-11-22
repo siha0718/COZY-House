@@ -1,18 +1,22 @@
 <template>
   <div class="leftSelect col-md-4">
-    <input class="search" placeholder="지역, 지하철역, 학교 검색" v-model="inputSearch" />
+    <input
+      class="search"
+      placeholder="지역, 지하철역, 학교 검색"
+      v-model="inputSearch"
+    />
 
     <!-- v-model houseType-->
     <div class="btn-group group"></div>
-    <div class="apt">아파트</div>
-    <div class="selectBuild">원룸, 투룸</div>
-    <div class="selectBuild2">빌라</div>
+    <div class="apt" @click="houseType = `apt`">아파트</div>
+    <div class="selectBuild" @click="houseType = `ot`">원룸, 투룸</div>
+    <div class="selectBuild2" @click="houseType = `villa`">빌라</div>
 
     <!-- v-model dealType-->
     <div class="typeText">거래유형</div>
-    <div class="inner1 inner">완료</div>
-    <div class="inner2">실거래</div>
-    <div class="inner3 inner">전체</div>
+    <div class="inner1 inner" @click="dealType = `done`">완료</div>
+    <div class="inner2" @click="dealType = `on`">실거래</div>
+    <div class="inner3 inner" @click="dealType = `all`">전체</div>
 
     <b-form-select
       v-model="sidoCode"
@@ -25,7 +29,12 @@
       :options="guguns"
       class="form-select form-select-sm sido sido2"
     ></b-form-select>
-    <select class="form-select form-select-sm sido sido3" label for="시/도" v-model="year">
+    <select
+      class="form-select form-select-sm sido sido3"
+      label
+      for="시/도"
+      v-model="year"
+    >
       <option>2014년</option>
       <option>2015년</option>
       <option>2016년</option>
@@ -36,16 +45,21 @@
       <option>2021년</option>
       <option>2022년</option>
     </select>
-    <select class="form-select form-select-sm sido sido4" label for="시/도" v-model="month">
-      <option>1월</option>
-      <option>2월</option>
-      <option>3월</option>
-      <option>4월</option>
-      <option>5월</option>
-      <option>6월</option>
-      <option>7월</option>
-      <option>8월</option>
-      <option>9월</option>
+    <select
+      class="form-select form-select-sm sido sido4"
+      label
+      for="시/도"
+      v-model="month"
+    >
+      <option>01월</option>
+      <option>02월</option>
+      <option>03월</option>
+      <option>04월</option>
+      <option>05월</option>
+      <option>06월</option>
+      <option>07월</option>
+      <option>08월</option>
+      <option>09월</option>
       <option>10월</option>
       <option>11월</option>
       <option>12월</option>
@@ -93,8 +107,6 @@ export default {
     this.CLEAR_SIDO_LIST();
     this.CLEAR_APT_LIST();
     this.getSido();
-    console.log("created 까지 해봤음");
-    console.log(this.$store.state.sidos);
   },
   methods: {
     ...mapActions(["getSido", "getGugun", "getHouseList"]),
@@ -108,7 +120,12 @@ export default {
       if (this.sidoCode) this.getGugun(this.sidoCode);
     },
     searchApt() {
-      if (this.sidoCode === "" || this.gugunCode === "" || this.year === "" || this.month === "") {
+      if (
+        this.sidoCode === "" ||
+        this.gugunCode === "" ||
+        this.year === "" ||
+        this.month === ""
+      ) {
         alert("필수 입력 시도 & 구군 & 년/월");
         return;
       }
@@ -123,6 +140,8 @@ export default {
         priceMin: this.priceMin,
         priceMax: this.priceMax,
       };
+      console.log("search시작 option은");
+      console.log(option);
       this.getHouseList(option);
     },
   },
