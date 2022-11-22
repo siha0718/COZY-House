@@ -9,7 +9,7 @@ public interface StarService {
 
 	public int registStar(StarDto starDto);
 
-	public List<String> getStarList(String userid);
+	public List<StarDto> getStarList(String userid);
 
 	public int deleteStar(StarDto starDto);
 

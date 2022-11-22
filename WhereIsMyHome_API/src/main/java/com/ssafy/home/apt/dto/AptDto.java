@@ -5,64 +5,66 @@ import io.swagger.annotations.ApiModel;
 @ApiModel(value = "ApiDto : 아파트정보", description = "아파트의 상세 정보를 나타낸다.")
 public class AptDto {
 	
-	private int aptCode;
-	private String aptName;
-	private String dongCode;
+	private int houseCode;
+	private String houseName;
+	private String regCode;
 	private String dongName;
-	private int buildYear;
 	private String jibun;
-	private String lat;
-	private String lng;
+	private String price;
+	private String year;
+	private String month;
+	private String type;
 	private String userid;
 	
 	
 	public AptDto() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	public AptDto(int aptCode, String aptName, String dongCode, String dongName, int buildYear, String jibun,
-			String lat, String lng, String userid) {
+
+
+	public AptDto(int houseCode, String houseName, String regCode, String dongName, String jibun, String price,
+			String year, String month, String type, String userid) {
 		super();
-		this.aptCode = aptCode;
-		this.aptName = aptName;
-		this.dongCode = dongCode;
+		this.houseCode = houseCode;
+		this.houseName = houseName;
+		this.regCode = regCode;
 		this.dongName = dongName;
-		this.buildYear = buildYear;
 		this.jibun = jibun;
-		this.lat = lat;
-		this.lng = lng;
+		this.price = price;
+		this.year = year;
+		this.month = month;
+		this.type = type;
 		this.userid = userid;
 	}
 
 
 	public int getAptCode() {
-		return aptCode;
+		return houseCode;
 	}
 
 
-	public void setAptCode(int aptCode) {
-		this.aptCode = aptCode;
+	public void setAptCode(int houseCode) {
+		this.houseCode = houseCode;
 	}
 
 
-	public String getAptName() {
-		return aptName;
+	public String getHouseName() {
+		return houseName;
 	}
 
 
-	public void setAptName(String aptName) {
-		this.aptName = aptName;
+	public void setHouseName(String houseName) {
+		this.houseName = houseName;
 	}
 
 
-	public String getDongCode() {
-		return dongCode;
+	public String getRegCode() {
+		return regCode;
 	}
 
 
-	public void setDongCode(String dongCode) {
-		this.dongCode = dongCode;
+	public void setRegCode(String regCode) {
+		this.regCode = regCode;
 	}
 
 
@@ -76,16 +78,6 @@ public class AptDto {
 	}
 
 
-	public int getBuildYear() {
-		return buildYear;
-	}
-
-
-	public void setBuildYear(int buildYear) {
-		this.buildYear = buildYear;
-	}
-
-
 	public String getJibun() {
 		return jibun;
 	}
@@ -96,23 +88,43 @@ public class AptDto {
 	}
 
 
-	public String getLat() {
-		return lat;
+	public String getPrice() {
+		return price;
 	}
 
 
-	public void setLat(String lat) {
-		this.lat = lat;
+	public void setPrice(String price) {
+		this.price = price;
 	}
 
 
-	public String getLng() {
-		return lng;
+	public String getYear() {
+		return year;
 	}
 
 
-	public void setLng(String lng) {
-		this.lng = lng;
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+
+	public String getMonth() {
+		return month;
+	}
+
+
+	public void setMonth(String month) {
+		this.month = month;
+	}
+
+
+	public String getType() {
+		return type;
+	}
+
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 
@@ -128,12 +140,8 @@ public class AptDto {
 
 	@Override
 	public String toString() {
-		return "AptDto [aptCode=" + aptCode + ", aptName=" + aptName + ", dongCode=" + dongCode + ", dongName="
-				+ dongName + ", buildYear=" + buildYear + ", jibun=" + jibun + ", lat=" + lat + ", lng=" + lng
-				+ ", userid=" + userid + "]";
+		return "AptDto [houseCode=" + houseCode + ", houseName=" + houseName + ", regCode=" + regCode + ", dongName="
+				+ dongName + ", jibun=" + jibun + ", price=" + price + ", year=" + year + ", month=" + month + ", type="
+				+ type + ", userid=" + userid + "]";
 	}
-	
-	
-	
-	
 }

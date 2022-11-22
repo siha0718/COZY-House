@@ -34,8 +34,8 @@ public class StarServiceImpl implements StarService {
 	
 
 	@Override
-	public List<String> getStarList(String userid) {
-		return starMapper.selectAll(userid);
+	public List<StarDto> getStarList(String userid) {
+		return starMapper.getStarList(userid);
 	}
 
 	//**************** 북마크 삭제 **********************/

@@ -4,44 +4,29 @@
 
 <mapper namespace="com.ssafy.home.comment.dao.CommentMapper">
 
-	<sql id="commentCoplumnsS">
-		  cmno, content, star, aptCode, userid
-	</sql>
-	
-	<sql id="commentColumns">
-		  cmno, content, date, star, userid, aptCode
-	</sql>
-
-	<insert id="insertComment" parameterType="CommentDto">
-		INSERT INTO comment (<include refid="commentCoplumnsS"/>)
-		VALUES (#{cmno}, #{content}, #{star}, #{aptCode}, #{userid})
+	<insert id="writeComment" parameterType="CommentDto">
+		INSERT INTO comment (content,houseCode,userid)
+		VALUES (#{content}, #{houseCode}, #{userid})
 	</insert>
-
 	
-	<select id="selectCommentDetail" parameterType="CommentDto" resultType="CommentDto">
-		SELECT <include refid="commentColumns" />
-		FROM comment
-		WHERE aptCode = #{aptCode} and cmno = #{cmno}
-	</select>
-	
-
-	<update id="updateComment" parameterType="CommentDto">
+	<update id="modifyComment" parameterType="CommentDto">
 		UPDATE comment
 		SET content = #{content}
-		WHERE cmno = #{cmno}
+		WHERE cmNum = #{cmNum}
 	</update>
 
-	<delete id="deleteComment" parameterType="CommentDto">
-		delete from comment
-		where cmno = #{cmno}
-	</delete>
-
-	<select id="selectCommentList" parameterType="int" resultType="CommentDto">
-		SELECT <include refid="commentColumns"/>
+	<select id="getCommentList" parameterType=Map resultType="CommentDto">
+		SELECT 	cmNum, content, houseCode, userid, time
 		FROM comment
-		WHERE aptCode = #{aptCode}
+		WHERE houseCode = #{houseCode} AND userid =#{userid}
 		ORDER BY date DESC;
 	</select>
+	
+	<delete id="deleteComment" parameterType="CommentDto">
+		delete from comment
+		where cmNum = #{cmNum}
+	</delete>
+
 
 	<select id="selectCommentTotalCount" parameterType="CommentDto" resultType="int">
 		SELECT COUNT(*)

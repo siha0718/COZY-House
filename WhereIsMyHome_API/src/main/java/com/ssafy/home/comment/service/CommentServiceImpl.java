@@ -2,6 +2,7 @@ package com.ssafy.home.comment.service;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +26,8 @@ public class CommentServiceImpl implements CommentService {
 	
 	
 	@Override
-	public int registerComment(CommentDto params) {
-		return commentMapper.insertComment(params);
+	public int writeComment(CommentDto commentDto) {
+		return commentMapper.writeComment(commentDto);
 	}
 	
 	
@@ -35,51 +36,25 @@ public class CommentServiceImpl implements CommentService {
 	
 	
 	@Override
-	public int modifyComment(CommentDto params) {	
-		return commentMapper.updateComment(params);
+	public int modifyComment(CommentDto commentDto) {	
+		return commentMapper.modifyComment(commentDto);
+	}
+	
+	/* -------------------------- 댓글 목록 반환 -------------------------- */
+	
+	
+	@Override
+	public List<CommentDto> getCommentList(Map<String, String> map) {		
+		return commentMapper.getCommentList(map);
 	}
 	
 	/* -------------------------- 댓글 삭제 -------------------------- */
 
 
 	@Override
-	public int deleteComment(int aptCode, int cmno) {
-		
-		CommentDto comment = new CommentDto();
-		
-		comment.setCmno(cmno);
-		comment.setAptCode(cmno);
-
-		return commentMapper.deleteComment(comment);
-		
-	}
-	
-	
-	
-	/* -------------------------- 댓글 내용 조회 -------------------------- */
-
-	
-	@Override
-	public CommentDto getComment(int aptCode, int cmno) {
-		
-		CommentDto comment = new CommentDto();
-		comment.setAptCode(aptCode);
-		comment.setCmno(cmno);
-		
-		return commentMapper.selectCommentDetail(comment);
+	public int deleteComment(CommentDto commentDto) {
+		return commentMapper.deleteComment(commentDto);
 	}
 
-	
-	
-	
-	/* -------------------------- 댓글 목록 반환 -------------------------- */
-
-	
-	@Override
-	public List<CommentDto> getCommentList(int aptCode) {		
-		return commentMapper.selectCommentList(aptCode);
-	}
-
-	
 	
 }

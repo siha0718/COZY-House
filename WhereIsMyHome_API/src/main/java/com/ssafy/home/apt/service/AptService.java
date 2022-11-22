@@ -7,7 +7,7 @@ import com.ssafy.home.apt.dto.AptDto;
 
 public interface AptService {
 
-	List<AptDto> infos(String dong) throws SQLException;
+	List<AptDto> getList(String regCode) throws SQLException;
 	int insertApt(AptDto aptDto) throws SQLException;
 	int deleteApt(AptDto aptDto)  throws SQLException;
 	int modifyApt(AptDto aptDto) throws SQLException;

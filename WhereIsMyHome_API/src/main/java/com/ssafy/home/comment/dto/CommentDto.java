@@ -7,88 +7,87 @@ import io.swagger.annotations.ApiModelProperty;
 public class CommentDto {
 	
 	@ApiModelProperty(value = "댓글번호") // 댓글번호가 맞나...?
-	private int cmno;
+	private int cmNum;
 	@ApiModelProperty(value = "댓글내용")
 	private String content;
-	@ApiModelProperty(value = "댓글작성날짜")
-	private String date;
-	@ApiModelProperty(value = "평점")
-	private double star;
+	@ApiModelProperty(value = "집고유번호")
+	private String houseCode;
 	@ApiModelProperty(value = "댓글작성자")
 	private String userid;
-	@ApiModelProperty(value = "아파트코드")
-	private int aptCode;
+	@ApiModelProperty(value = "댓글작성날짜")
+	private String time;
 	
 	
 	public CommentDto() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public CommentDto(int cmno, String content, String date, double star, String userid, int aptCode) {
+
+
+	public CommentDto(int cmNum, String content, String houseCode, String userid, String time) {
 		super();
-		this.cmno = cmno;
+		this.cmNum = cmNum;
 		this.content = content;
-		this.date = date;
-		this.star = star;
+		this.houseCode = houseCode;
 		this.userid = userid;
-		this.aptCode = aptCode;
-	}
-		
-
-	public int getCmno() {
-		return cmno;
+		this.time = time;
 	}
 
-	public void setCmno(int cmno) {
-		this.cmno = cmno;
+
+	public int getCmNum() {
+		return cmNum;
 	}
+
+
+	public void setCmNum(int cmNum) {
+		this.cmNum = cmNum;
+	}
+
 
 	public String getContent() {
 		return content;
 	}
 
+
 	public void setContent(String content) {
 		this.content = content;
 	}
 
-	public String getDate() {
-		return date;
+
+	public String getHouseCode() {
+		return houseCode;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
+
+	public void setHouseCode(String houseCode) {
+		this.houseCode = houseCode;
 	}
 
-	public double getStar() {
-		return star;
-	}
-
-	public void setStar(double star) {
-		this.star = star;
-	}
 
 	public String getUserid() {
 		return userid;
 	}
 
+
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
 
-	public int getAptCode() {
-		return aptCode;
+
+	public String getTime() {
+		return time;
 	}
 
-	public void setAptCode(int aptCode) {
-		this.aptCode = aptCode;
+
+	public void setTime(String time) {
+		this.time = time;
 	}
+
 
 	@Override
 	public String toString() {
-		return "CommentDto [cmno=" + cmno + ", content=" + content + ", date=" + date + ", star=" + star + ", userid="
-				+ userid + ", aptCode=" + aptCode + "]";
+		return "CommentDto [cmNum=" + cmNum + ", content=" + content + ", houseCode=" + houseCode + ", userid=" + userid
+				+ ", time=" + time + "]";
 	}
-	
 	
 	
 }

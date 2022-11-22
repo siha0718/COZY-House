@@ -1,6 +1,7 @@
 package com.ssafy.home.comment.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -9,15 +10,13 @@ import com.ssafy.home.comment.dto.CommentDto;
 @Mapper
 public interface CommentMapper {
 
-	public int insertComment(CommentDto params);
+	public int writeComment(CommentDto commentDto);
 
-	public CommentDto selectCommentDetail(CommentDto params);
+	public int modifyComment(CommentDto commentDto);
 
-	public int updateComment(CommentDto params);
-
-	public int deleteComment(CommentDto params);
-
-	public List<CommentDto> selectCommentList(int aptCode);
+	public List<CommentDto> getCommentList(Map<String, String> map);
+	
+	public int deleteComment(CommentDto commentDto);
 
 	public int selectCommentTotalCount(int aptCode);
 	

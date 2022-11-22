@@ -7,24 +7,21 @@
 	<sql id="starColumns">
 		  aptCode, userid
 	</sql>
-		
 
 	<insert id="insertStar" parameterType="StarDto">
-		INSERT INTO bookmark (<include refid="starColumns"/>)
-		VALUES (#{aptCode}, #{userid})
+		INSERT INTO bookmark (houseCode, houseName, regCode, dongName, jibun, price, year, month, type, userid)
+		VALUES (#{houseCode}, #{houseName},#{regCode},#{dongName},#{jibun},#{price},#{year},#{month},#{type},#{userid})
 	</insert>	
 
-	<delete id="deleteStar" parameterType="StarDto">
-		delete from bookmark
-		where aptCode = #{aptCode} and userid = #{userid}
-	</delete>
-
-	<select id="selectAll" parameterType="string" resultType="String">
-		SELECT aptCode
+	<select id="getStarList" parameterType="string" resultType="StarDto">
+		SELECT houseCode, houseName, regCode, dongName, jibun, price, year, month, type, userid
 		FROM bookmark
 		WHERE userid = #{userid}
 	</select>
 
-
+	<delete id="deleteStar" parameterType="StarDto">
+		delete from bookmark
+		where houseCode = #{houseCode} and userid = #{userid}
+	</delete>
 
 </mapper>

@@ -1,7 +1,4 @@
 <template>
-<<<<<<< HEAD
-  <div>리스트입니다!</div>
-=======
   <div>
     <!-- 오른쪽 화면 토글 버튼  -->
     <div class="toggle">
@@ -13,14 +10,7 @@
         viewBox="0 0 96 96"
       >
         <defs>
-          <filter
-            id="타원_13"
-            x="0"
-            y="0"
-            width="96"
-            height="96"
-            filterUnits="userSpaceOnUse"
-          >
+          <filter id="타원_13" x="0" y="0" width="96" height="96" filterUnits="userSpaceOnUse">
             <feOffset dx="5" input="SourceAlpha" />
             <feGaussianBlur stdDeviation="5" result="blur" />
             <feFlood flood-opacity="0.439" />
@@ -28,15 +18,8 @@
             <feComposite in="SourceGraphic" />
           </filter>
         </defs>
-        <g
-          id="그룹_4"
-          data-name="그룹 4"
-          transform="translate(-1379.364 -574.364)"
-        >
-          <g
-            transform="matrix(1, 0, 0, 1, 1379.36, 574.36)"
-            filter="url(#타원_13)"
-          >
+        <g id="그룹_4" data-name="그룹 4" transform="translate(-1379.364 -574.364)">
+          <g transform="matrix(1, 0, 0, 1, 1379.36, 574.36)" filter="url(#타원_13)">
             <circle
               id="타원_13-2"
               data-name="타원 13"
@@ -68,11 +51,7 @@
         <h5 class="areaTitle" @click="test">지역 목록</h5>
 
         <div class="areaList" v-if="houses && houses.length != 0">
-          <house-list-item
-            v-for="(house, index) in houses"
-            :key="index"
-            :house="house"
-          />
+          <house-list-item v-for="(house, index) in houses" :key="index" :house="house" />
           <!--
           <div class="list">
             <img src="img/화면 캡처 2022-11-22 022838.png" alt="" />
@@ -438,17 +417,10 @@
       </div>
     </div>
   </div>
->>>>>>> 85669316f51d75e1af746d9d5c0bb05da242bc13
 </template>
 
 <script>
 import { mapState, mapActions, mapMutations } from "vuex";
-<<<<<<< HEAD
-
-export default {
-  name: "HouseList",
-  components: {},
-=======
 import HouseListItem from "@/components/house/HouseListItem.vue";
 
 export default {
@@ -456,18 +428,12 @@ export default {
   components: {
     HouseListItem,
   },
->>>>>>> 85669316f51d75e1af746d9d5c0bb05da242bc13
   data() {
     return {};
   },
   computed: {
     ...mapState(["houses"]),
   },
-<<<<<<< HEAD
-};
-</script>
-<style></style>
-=======
   methods: {
     test() {
       console.log("하우스 사이즈는");
@@ -481,4 +447,3 @@ export default {
 @import "../../../public/css/house-list.css";
 @import "../../../public/css/house-search.css";
 </style>
->>>>>>> 85669316f51d75e1af746d9d5c0bb05da242bc13

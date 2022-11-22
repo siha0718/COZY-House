@@ -53,16 +53,15 @@ public class CommentController {
 	
 	
 	@ApiOperation(value = "댓글 작성", notes = "새로운 댓글을 입력한다. 그리고 DB입력 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
-	@PostMapping("/{aptCode}")
+	@PostMapping
 	public ResponseEntity<Map<String, Object>> writeComment(
-			@RequestBody @ApiParam(value = "댓글 정보", required = true) CommentDto commentDto, 
-			@PathVariable @ApiParam(value = "아파트 번호", required = true) int aptCode) throws Exception {
+			@RequestBody @ApiParam(value = "댓글 정보", required = true) CommentDto commentDto) throws Exception {
 		Map<String, Object> resMap = new HashMap<String, Object>();
 		HttpStatus status = null;
-		
+		logger.info("writeComment - 호출");
+		logger.info("받은 정보 -" + commentDto);
 		try {
-			commentDto.setAptCode(aptCode);
-			int res = service.registerComment(commentDto);
+			int res = service.writeComment(commentDto);
 			
 			logger.info("writeComment - 호출");
 			if (res == 1) {
@@ -91,20 +90,15 @@ public class CommentController {
 	
 	
 	@ApiOperation(value = "댓글수정", notes = "수정할 댓글정보를 입력한다. 그리고 DB수정 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
-	@PutMapping("/{aptCode}/{cmno}")
+	@PutMapping
 	public ResponseEntity<Map<String, Object>> modifyComment(
-			@RequestBody @ApiParam(value = "수정할 글정보.", required = true) CommentDto commentDto,
-			@PathVariable @ApiParam(value = "수정할 댓글의 아파트 정보", required = true) int aptCode,
-			@PathVariable @ApiParam(value = "댓글 번호", required = true) int cmno) throws Exception {
+			@RequestBody @ApiParam(value = "수정할 글정보.", required = true) CommentDto commentDto) throws Exception {
 			
-		
 		Map<String, Object> resMap = new HashMap<String, Object>();
 		HttpStatus status = null;	
-		commentDto.setCmno(cmno);
-		commentDto.setAptCode(aptCode);
+		logger.info("modifyComment - 호출 {}", commentDto);
 		
 		try {
-			logger.info("modifyComment - 호출 {}", commentDto);
 			int res = service.modifyComment(commentDto);
 			
 			if (res == 1) {
@@ -131,16 +125,20 @@ public class CommentController {
 	
  
 	@ApiOperation(value = "댓글목록", notes = "댓글의 정보를 반환한다.", response = List.class)
-	@GetMapping("/{aptCode}")
-	public ResponseEntity<Map<String, Object>> listComment(
-			@PathVariable("aptCode") @ApiParam(value = "아파트 번호", required = true) int aptCode) throws Exception {
+	@GetMapping("/{houseCode}/{userid}")
+	public ResponseEntity<Map<String, Object>> getCommentList(
+			@PathVariable("houseCode") @ApiParam(value = "집 고유 번호", required = true) String houseCode,
+			@PathVariable("userid") @ApiParam(value = "유저아이디", required = true) String userid) throws Exception {
 		Map<String, Object> resMap = new HashMap<String, Object>();
 		HttpStatus status = null;
+		logger.info("listComment - 호출");
+		
 		List<CommentDto> commentList = null;
-	
-		try {			
-			logger.info("listComment - 호출");
-			commentList = service.getCommentList(aptCode);
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("houseCode", houseCode);
+		map.put("userid", userid);
+		try {
+			commentList = service.getCommentList(map);
 			System.out.println(">>>>>댓글목록 사이즈 : " + commentList.size());
 			
 			if(commentList != null && commentList.size() > 0) {
@@ -166,64 +164,21 @@ public class CommentController {
 	
 	
 	
-	
-	/* -------------------------- 댓글 내용 조회 -------------------------- */
-
-	
-	
-	@ApiOperation(value = "댓글보기", notes = "글번호에 해당하는 댓글의 정보를 반환한다.", response = CommentDto.class)
-	@GetMapping("/{aptCode}/{cmno}")
-	public ResponseEntity<Map<String, Object>> getComment(
-			@PathVariable("aptCode") @ApiParam(value = "얻어올 글의 글번호.", required = true) int aptCode,
-			@PathVariable("cmno") @ApiParam(value = "댓글 번호", required = true) int cmno) throws Exception {
-				
-		Map<String, Object> resMap = new HashMap<String, Object>();
-		HttpStatus status = null;
-		CommentDto comment = null;
-		
-		try {
-			
-			logger.info("getComment - 호출 : " + aptCode);
-			comment = service.getComment(aptCode, cmno);
-			if(comment != null) {
-				resMap.put("msg", SUCCESS);
-				resMap.put("article", comment);
-				status = HttpStatus.ACCEPTED;
-			}
-			else {
-				resMap.put("msg", FAIL);
-				status = HttpStatus.ACCEPTED;
-				
-			}
-			
-		} catch (Exception e) {
-			logger.error("댓글 조회 실패 : {}", e);
-			resMap.put("msg", e.getMessage());
-			status = HttpStatus.INTERNAL_SERVER_ERROR;
-		}
-		
-		return new ResponseEntity<Map<String, Object>>(resMap, status);
-	}
-	
-	
-	
 	/* -------------------------- 댓글 삭제 -------------------------- */
 
 	
-	@ApiOperation(value = "댓글삭제", notes = "글번호에 해당하는 댓글의 정보를 삭제한다. 그리고 DB삭제 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
-	@DeleteMapping("/{aptCode}/{cmno}")
+	@ApiOperation(value = "댓글삭제", notes = " 해당하는 댓글의 정보를 삭제한다. 그리고 DB삭제 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
+	@DeleteMapping
 	public ResponseEntity<Map<String, Object>> deleteComment(
-			@PathVariable("aptCode") @ApiParam(value = "삭제할 댓글의 글번호.", required = true) int aptCode, 
-			@PathVariable("cmno") @ApiParam(value = "댓글번호.", required = true) int cmno) throws Exception {
+			@RequestBody @ApiParam(value = "수정할 글정보.", required = true) CommentDto commentDto) throws Exception {
 			
 		Map<String, Object> resMap = new HashMap<String, Object>();
 		HttpStatus status = null;	
+		logger.info("deleteComment - 호출 {}" + commentDto);
 		
 		try {
 			
-			logger.info("deleteComment - 호출");
-			
-			int res = service.deleteComment(aptCode, cmno);
+			int res = service.deleteComment(commentDto);
 			
 			if (res == 1) {
 				resMap.put("msg", SUCCESS);

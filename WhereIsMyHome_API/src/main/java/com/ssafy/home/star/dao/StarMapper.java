@@ -11,7 +11,7 @@ public interface StarMapper {
 
 	public int insertStar(StarDto starDto);
 
-	public List<String> selectAll(String userid);
+	public List<StarDto> getStarList(String userid);
 
 	public int deleteStar(StarDto starDto);
 	

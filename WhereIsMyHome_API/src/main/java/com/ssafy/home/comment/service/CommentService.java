@@ -1,6 +1,7 @@
 package com.ssafy.home.comment.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.ssafy.home.comment.dto.CommentDto;
 import com.ssafy.home.star.dto.service.StarDto;
@@ -8,15 +9,12 @@ import com.ssafy.home.star.dto.service.StarDto;
 public interface CommentService {
 
 	
-	public int registerComment(CommentDto params);
+	public int writeComment(CommentDto commentDto);
 	
-	public int modifyComment(CommentDto params);
+	public int modifyComment(CommentDto commentDto);
 
-	public int deleteComment(int aptCode, int cmno);
-
-	public CommentDto getComment(int aptCode, int cmno);
+	public List<CommentDto> getCommentList(Map<String, String> map);
 	
-	public List<CommentDto> getCommentList(int aptCode);
-
+	public int deleteComment(CommentDto commentDto);
 
 }

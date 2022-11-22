@@ -1,18 +1,8 @@
 <template>
   <nav class="navbar navbar-expand-sm">
     <div class="container-fluid header">
-<<<<<<< HEAD
-      <a class="navbar-brand logo" href="#">LOGO</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-=======
       <router-link class="navbar-brand logo" :to="'/'">LOGO</router-link>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#collapsibleNavbar"
-      >
->>>>>>> 85669316f51d75e1af746d9d5c0bb05da242bc13
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-center" id="collapsibleNavbar">
@@ -20,16 +10,6 @@
           <li class="nav-item">
             <router-link class="nav-link" :to="'/house'">HOUSE</router-link>
           </li>
-<<<<<<< HEAD
-          <!-- <li class="nav-item">
-              <a class="nav-link" href="#" :to="'/board/write'">즐겨찾기</a>
-            </li> -->
-        </ul>
-      </div>
-      <ul class="navbar-nav">
-        <li class="nav-item justify-content-end">
-          <a class="nav-link" href="#">로그인</a>
-=======
           <li class="nav-item">
             <router-link class="nav-link" :to="'/house'">즐겨찾기</router-link>
           </li>
@@ -58,7 +38,6 @@
         </li>
         <li class="nav-item justify-content-end">
           <router-link class="nav-link" :to="'/user/regist'">회원가입</router-link>
->>>>>>> 85669316f51d75e1af746d9d5c0bb05da242bc13
         </li>
       </ul>
     </div>
@@ -81,11 +60,7 @@ export default {
 };
 </script>
 <style scoped>
-<<<<<<< HEAD
-@import "../../public/css/prototype1.css";
-=======
 @import "../../public/css/main.css";
 @import "../../public/css/house-list.css";
 @import "../../public/css/house-search.css";
->>>>>>> 85669316f51d75e1af746d9d5c0bb05da242bc13
 </style>

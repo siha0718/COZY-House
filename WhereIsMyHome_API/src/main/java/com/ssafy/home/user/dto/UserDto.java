@@ -7,9 +7,9 @@ public class UserDto {
 	private String userid; // 아이디
 	private String userpwd; // 비밀번호
 	private String username; // 이름
-	private String useremail;// 주소
-	private String joindate; // 전화번호
-	private int userclass;
+	private String useremail;// 이메일
+	private String joindate; // 가입날짜
+	private int userclass; //유저등급
 	
 	public UserDto() {
 	}

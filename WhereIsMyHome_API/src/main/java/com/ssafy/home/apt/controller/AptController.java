@@ -57,11 +57,11 @@ public class AptController {
 	//********************* 아파트 리스트 불러오기 ************************/
 	
 	
-	@ApiOperation(value="아파트 리스트 조회", notes = "동코드에 맞는 저장된 아파트 리스트를 불러온다")
-	@GetMapping("/{dongcode}")
-	public ResponseEntity<Map<String, Object>> getInfos(@PathVariable("dongcode") @ApiParam(value="얻어올 동 번호", required = true) String dongcode)  {
+	@ApiOperation(value="아파트 리스트 조회", notes = "지역코드에 맞는 저장된 아파트 리스트를 불러온다")
+	@GetMapping("/{regCode}")
+	public ResponseEntity<Map<String, Object>> getList(@PathVariable("regCode") @ApiParam(value="얻어올 지역 번호", required = true) String regCode)  {
 		
-		logger.info("getInfos - 호출");
+		logger.info("getList - 호출");
 		Map<String, Object> resultMap = new HashMap<>();
 		HttpStatus status = null;
 		
@@ -69,7 +69,7 @@ public class AptController {
 		
 		try {
 			
-			aptList = service.infos(dongcode);		
+			aptList = service.getList(regCode);		
 			
 			System.out.println(aptList);
 			resultMap.put("aptList", aptList);
@@ -98,7 +98,7 @@ public class AptController {
 		HttpStatus status = null;
 		
 		try {
-			logger.info("updateApt - 호출");
+			logger.info("insertApt - 호출");
 			
 			logger.info("apt 정보"+aptDto);
 			int res = service.insertApt(aptDto);
@@ -116,7 +116,7 @@ public class AptController {
 			
 			
 		} catch (SQLException e) {
-			logger.error("updateApt 호출실패 : { }", e);
+			logger.error("insertApt 호출실패 : { }", e);
 			resultMap.put("msg", e.getMessage());
 			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		}

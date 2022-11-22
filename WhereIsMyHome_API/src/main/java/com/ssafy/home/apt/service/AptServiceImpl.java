@@ -20,8 +20,8 @@ public class AptServiceImpl implements AptService{
 	}
 	
 	@Override
-	public List<AptDto> infos(String dong) throws SQLException {
-		return dao.selectAll(dong);
+	public List<AptDto> getList(String regCode) throws SQLException {
+		return dao.getList(regCode);
 	}
 
 

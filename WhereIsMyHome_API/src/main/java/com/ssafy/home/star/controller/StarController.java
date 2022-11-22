@@ -59,11 +59,11 @@ public class StarController {
 		
 		Map<String, Object> resMap = new HashMap<String, Object>();
 		HttpStatus status = null;
+		logger.info("registStar - 호출 {}" + starDto);
 		
 		try {
 			int res = service.registStar(starDto);
-			
-			logger.info("registStar - 호출");
+
 			if (res == 1) {
 				resMap.put("msg", SUCCESS);
 				status = HttpStatus.ACCEPTED;
@@ -93,16 +93,15 @@ public class StarController {
  
 	@ApiOperation(value = "즐겨찾기 목록", notes = "즐겨찾기 정보를 반환한다.", response = List.class)
 	@GetMapping("/{userid}")
-	public ResponseEntity<Map<String, Object>> listStar(
+	public ResponseEntity<Map<String, Object>> getStarList(
 			@PathVariable("aptCode") @ApiParam(value = "아파트 번호", required = true) String userid) throws Exception {
 		
 		Map<String, Object> resMap = new HashMap<String, Object>();
 		HttpStatus status = null;
-//		List<StarDto> starList = null;
-		List<String> starList = null;
+		logger.info("listStar - 호출 {}" + userid);
+		List<StarDto> starList = null;
 	
 		try {			
-			logger.info("listStar - 호출");
 			starList = service.getStarList(userid);
 			System.out.println(">>>>>즐겨찾기 목록 사이즈 : " + starList.size());
 			
@@ -139,10 +138,9 @@ public class StarController {
 			
 		Map<String, Object> resMap = new HashMap<String, Object>();
 		HttpStatus status = null;	
+		logger.info("deleteStar - 호출{}" + starDto);
 		
 		try {
-			
-			logger.info("deleteStar - 호출");
 			
 			int res = service.deleteStar(starDto);
 			
@@ -162,8 +160,4 @@ public class StarController {
 		return new ResponseEntity<Map<String, Object>>(resMap, status);
 	}
 		
-	
-	
-	
-	
 }

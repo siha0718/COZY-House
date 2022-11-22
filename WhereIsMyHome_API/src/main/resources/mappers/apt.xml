@@ -5,18 +5,18 @@
 <mapper namespace="com.ssafy.home.apt.dao.AptDao">
 
 
-	<select id="selectAll" resultType="AptDto" parameterType="string">
-		select aptCode, aptName, dongCode, dongName, buildYear, jibun, lat, lng, userid
+	<select id="getList" resultType="AptDto" parameterType="string">
+		select houseCode, houseName, regCode, dongName, jibun, price, year, month, type, userid
 		from houseinfo
-		where dongCode = #{dongCode}
+		where regCode = #{regCode}
 	</select>
 
 
 	<insert id = "insertApt" parameterType = "AptDto">
 		insert into houseinfo
-		(aptCode, aptName, dongCode, dongName, buildYear, jibun, lat, lng, userid)
-		values(#{aptCode}, #{aptName}, #{dongCode}, #{dongName}, 
-		#{buildYear}, #{jibun},#{lat},#{lng},#{userid})
+		(houseName, regCode, dongName, jibun, price, year, month, type, userid)
+		values(#{houseName}, #{regCode}, #{dongName}, #{jibun}, 
+		#{price}, #{year},#{month},#{type},#{userid})
 	</insert>
 	
 	
@@ -24,22 +24,23 @@
 	<update id="modifyApt" parameterType="AptDto">
 		update houseinfo
 		<trim prefix="set" suffixOverrides=",">		
-			<if test="aptName != null">aptName = #{aptName},</if>
-			<if test="dongCode != null">dongCode = #{dongCode},</if>
+			<if test="houseName != null">houseName = #{houseName},</if>
+			<if test="regCode != null">regCode = #{regCode},</if>
 			<if test="dongName != null">dongName = #{dongName},</if>
-			<if test="buildYear != null">buildYear = #{buildYear},</if>
 			<if test="jibun != null">jibun = #{jibun},</if>
-			<if test="lat != null">lat = #{lat},</if>
-			<if test="lng != null">lng = #{lng},</if>
+			<if test="price != null">price = #{price},</if>
+			<if test="year != null">year = #{year},</if>
+			<if test="month != null">month = #{month},</if>
+			<if test="type != null">type = #{type},</if>
 		</trim>
-		where aptCode = #{aptCode}
+		where houseCode = #{houseCode}
 	
 	</update>
 	
 	
 	<delete id="deleteApt" parameterType="AptDto">
 		delete from houseinfo
-		where aptCode = #{aptCode}
+		where houseCode = #{houseCode}
 	</delete>
 	
 </mapper>
