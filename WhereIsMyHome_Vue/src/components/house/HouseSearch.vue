@@ -73,7 +73,6 @@
 
 <script>
 import { mapState, mapActions, mapMutations } from "vuex";
-
 export default {
   name: "HouseSearch",
   components: {},
@@ -129,6 +128,7 @@ export default {
       // console.log("search시작 option은");
       // console.log(option);
       this.getHouseList(option);
+      // eventBus.$emit("housList", this.$store.state.houses);
     },
   },
 };

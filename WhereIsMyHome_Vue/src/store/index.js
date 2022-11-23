@@ -3,6 +3,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
 import http from "@/api/http";
+import { eventBus } from "../main.js";
 
 Vue.use(Vuex);
 // import boardStore from '@/store/modules/boardStore.js'
@@ -441,6 +442,7 @@ export default new Vuex.Store({
                 }
               }
               commit("SET_HOUSE_LIST", house_list);
+              eventBus.$emit("housList", house_list);
             }
           })
           .catch((error) => {
