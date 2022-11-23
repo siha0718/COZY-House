@@ -2,19 +2,29 @@
   <nav class="navbar navbar-expand-sm">
     <div class="container-fluid header">
       <router-link class="navbar-brand logo" :to="'/'">LOGO</router-link>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapsibleNavbar"
+      >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse justify-content-center" id="collapsibleNavbar">
+      <div
+        class="collapse navbar-collapse justify-content-center"
+        id="collapsibleNavbar"
+      >
         <ul class="navbar-nav">
           <li class="nav-item">
             <router-link class="nav-link" :to="'/house'">HOUSE</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" :to="'/house'">즐겨찾기</router-link>
+            <router-link class="nav-link" :to="'/star'">즐겨찾기</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" :to="'/house'">매물올리기</router-link>
+            <router-link class="nav-link" :to="'/house'"
+              >매물올리기</router-link
+            >
           </li>
           <li class="nav-item">
             <router-link class="nav-link" :to="'/house'">건의사항</router-link>
@@ -23,7 +33,9 @@
       </div>
       <ul class="navbar-nav" v-if="loginUser">
         <li class="nav-item justify-content-end">
-          <router-link class="nav-link" :to="'/user/detail'">회원수정</router-link>
+          <router-link class="nav-link" :to="'/user/detail'"
+            >회원수정</router-link
+          >
         </li>
 
         <li class="nav-item justify-content-end">
@@ -37,7 +49,9 @@
           <router-link class="nav-link" :to="'/user/login'">로그인</router-link>
         </li>
         <li class="nav-item justify-content-end">
-          <router-link class="nav-link" :to="'/user/regist'">회원가입</router-link>
+          <router-link class="nav-link" :to="'/user/regist'"
+            >회원가입</router-link
+          >
         </li>
       </ul>
     </div>

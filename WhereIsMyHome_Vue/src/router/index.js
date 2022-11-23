@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import AppHouse from "@/views/AppHouse.vue";
+import AppStar from "@/views/AppStar.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -78,6 +79,11 @@ const routes = [
         component: () => import("@/components/house/HouseDetail"),
       },
     ],
+  },
+  {
+    path: "/star",
+    name: "star",
+    component: AppStar,
   },
 ];
 
