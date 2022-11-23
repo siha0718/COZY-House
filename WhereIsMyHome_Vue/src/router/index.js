@@ -1,5 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+
+import AppMain from "@/views/AppMain.vue";
 import AppHouse from "@/views/AppHouse.vue";
 import AppStar from "@/views/AppStar.vue";
 Vue.use(VueRouter);
@@ -8,7 +10,7 @@ const routes = [
   {
     path: "/",
     name: "main",
-    // component: HomeView
+    component: AppMain,
   },
   {
     path: "/board",

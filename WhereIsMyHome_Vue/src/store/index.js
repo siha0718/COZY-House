@@ -52,7 +52,7 @@ export default new Vuex.Store({
       state.loginUser = user;
     },
     DELETE_LOGIN_USER(state) {
-      console.log("뮤테이션 딜리트 실행");
+      // console.log("뮤테이션 딜리트 실행");
       state.loginUser = null;
     },
     ////////BOARD////////
@@ -162,22 +162,27 @@ export default new Vuex.Store({
         method: "POST",
         data: user,
       })
-        .then((res) => {
+        .then(async (res) => {
           // console.log(res.data.msg);
           // console.log(res.data.user);
           if (res.data.msg == "success") {
             alert("로그인 성공!");
             // console.log("action"+user.userid);
-            commit("SET_LOGIN_USER", res.data.user);
-            router.push("/");
+            await commit("SET_LOGIN_USER", res.data.user);
+            router.push({ name: "main" });
           } else {
             alert("로그인 실패");
-            router.push("/user/login");
           }
         })
         .catch((err) => {
           console.log(err);
         });
+    },
+    //로그아웃
+    setLogout: function ({ commit }) {
+      commit("DELETE_LOGIN_USER");
+      router.push({ name: "main" });
+      alert("로그아웃");
     },
     //회원정보 수정
     updateUser: function ({ commit }, user) {
@@ -339,7 +344,9 @@ export default new Vuex.Store({
         }
         const params = {
           LAWD_CD: option.gugunCode.substr(0, 5),
-          DEAL_YMD: option.year.substr(0, option.year.length - 1) + option.month.substr(0, option.month.length - 1),
+          DEAL_YMD:
+            option.year.substr(0, option.year.length - 1) +
+            option.month.substr(0, option.month.length - 1),
           serviceKey: decodeURIComponent(SERVICE_KEY),
           numOfRows: 20,
         };

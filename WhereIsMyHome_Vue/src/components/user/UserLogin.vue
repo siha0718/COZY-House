@@ -58,6 +58,7 @@ export default {
     ...mapActions(["setLoginUser"]),
     dologin() {
       this.setLoginUser(this.user);
+      // router.push("/");
     },
   },
 };
