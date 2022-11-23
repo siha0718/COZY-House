@@ -1,19 +1,23 @@
 <template>
   <div class="leftSelect col-md-4">
-    <input class="search" placeholder="지역, 지하철역, 학교 검색" v-model="inputSearch" />
+    <input
+      class="search"
+      placeholder="지역, 지하철역, 학교 검색"
+      v-model="inputSearch"
+    />
 
     <!-- v-model houseType-->
     <div class="group">
-      <button class="apt" @click="houseType = `apt`">아파트</button>
-      <button class="selectBuild" @click="houseType = `ot`">원룸, 투룸</button>
-      <button class="selectBuild2" @click="houseType = `villa`">빌라</button>
+      <div class="btn apt" @click="houseType = `apt`">아파트</div>
+      <div class="btn selectBuild" @click="houseType = `ot`">원룸, 투룸</div>
+      <div class="btn selectBuild2" @click="houseType = `villa`">빌라</div>
     </div>
 
     <!-- v-model dealType-->
     <div class="typeText">거래유형</div>
-    <button class="inner1 inner" @click="dealType = `done`">완료</button>
-    <button class="inner2" @click="dealType = `on`">실거래</button>
-    <button class="inner3 inner" @click="dealType = `all`">전체</button>
+    <div class="inner1 inner btn" @click="dealType = `done`">완료</div>
+    <div class="inner2 btn" @click="dealType = `on`">실거래</div>
+    <div class="inner3 inner btn" @click="dealType = `all`">전체</div>
 
     <div class="selectBox">
       <b-form-select
@@ -27,7 +31,12 @@
         :options="guguns"
         class="form-select form-select-sm sido sido2"
       ></b-form-select>
-      <select class="form-select form-select-sm sido sido3" label for="시/도" v-model="year">
+      <select
+        class="form-select form-select-sm sido sido3"
+        label
+        for="시/도"
+        v-model="year"
+      >
         <option>2014년</option>
         <option>2015년</option>
         <option>2016년</option>
@@ -38,7 +47,12 @@
         <option>2021년</option>
         <option>2022년</option>
       </select>
-      <select class="form-select form-select-sm sido sido4" label for="시/도" v-model="month">
+      <select
+        class="form-select form-select-sm sido sido4"
+        label
+        for="시/도"
+        v-model="month"
+      >
         <option>01월</option>
         <option>02월</option>
         <option>03월</option>
@@ -66,7 +80,9 @@
 
     <div class="typeText3">전체해제</div>
 
-    <button @click="searchApt" type="button" class="searchBtn textSet">검색</button>
+    <button @click="searchApt" type="button" class="searchBtn textSet">
+      검색
+    </button>
     <!-- <div class="searchBtn textSet">검색</div> -->
   </div>
 </template>
@@ -111,7 +127,12 @@ export default {
       if (this.sidoCode) this.getGugun(this.sidoCode);
     },
     searchApt() {
-      if (this.sidoCode === "" || this.gugunCode === "" || this.year === "" || this.month === "") {
+      if (
+        this.sidoCode === "" ||
+        this.gugunCode === "" ||
+        this.year === "" ||
+        this.month === ""
+      ) {
         alert("필수 입력 시도 & 구군 & 년/월");
         return;
       }

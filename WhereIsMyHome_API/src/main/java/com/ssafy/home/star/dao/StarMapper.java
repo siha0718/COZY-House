@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.ssafy.home.star.dto.service.StarDto;
+import com.ssafy.home.star.dto.StarDto;
 
 @Mapper
 public interface StarMapper {

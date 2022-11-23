@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.ssafy.home.comment.dto.CommentDto;
-import com.ssafy.home.star.dto.service.StarDto;
+import com.ssafy.home.star.dto.StarDto;
 
 public interface CommentService {
 

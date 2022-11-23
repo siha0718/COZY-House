@@ -3,7 +3,7 @@ package com.ssafy.home.star.service;
 import java.util.List;
 
 import com.ssafy.home.comment.dto.CommentDto;
-import com.ssafy.home.star.dto.service.StarDto;
+import com.ssafy.home.star.dto.StarDto;
 
 public interface StarService {
 

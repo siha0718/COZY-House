@@ -1,4 +1,4 @@
-package com.ssafy.home.star.dto.service;
+package com.ssafy.home.star.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 
 import com.ssafy.home.star.dao.StarMapper;
-import com.ssafy.home.star.dto.service.StarDto;
+import com.ssafy.home.star.dto.StarDto;
 
 @Service
 public class StarServiceImpl implements StarService {
