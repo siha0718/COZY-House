@@ -15,7 +15,7 @@
 		WHERE cmNum = #{cmNum}
 	</update>
 
-	<select id="getCommentList" parameterType=Map resultType="CommentDto">
+	<select id="getCommentList" parameterType="Map" resultType="CommentDto">
 		SELECT 	cmNum, content, houseCode, userid, time
 		FROM comment
 		WHERE houseCode = #{houseCode} AND userid =#{userid}

@@ -55,6 +55,11 @@ public class SwaggerConfiguration {
 		return getDocket("apt", "아파트", Predicates.or(PathSelectors.regex("/apt.*")));
 
 	}
+	@Bean
+	public Docket starApi() {
+		return getDocket("star", "즐겨찾기", Predicates.or(PathSelectors.regex("/star.*")));
+
+	}
 
 //	@Bean
 //	public Docket allApi() {

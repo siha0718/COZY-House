@@ -75,7 +75,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `project`.`bookmark` ;
 
 CREATE TABLE IF NOT EXISTS `project`.`bookmark` (
-  `houseCode` VARCHAR(45) NULL,
+  `houseCode` VARCHAR(45) NOT NULL,
   `houseName` VARCHAR(45) NULL,
   `regCode` VARCHAR(45) NULL,
   `dongName` VARCHAR(45) NULL,
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `project`.`bookmark` (
   `year` VARCHAR(45) NULL,
   `month` VARCHAR(45) NULL,
   `type` VARCHAR(45) NULL,
-  `userid` VARCHAR(45) NULL)
+  `userid` VARCHAR(45) NOT NULL)
 ENGINE = InnoDB;
 
 
