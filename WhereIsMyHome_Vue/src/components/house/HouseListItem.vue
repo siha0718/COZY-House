@@ -43,6 +43,9 @@ export default {
     house: Object,
   },
   methods: {
+    ...mapActions(["addStar"]),
+    ...mapMutations(["ADD_USER_STARS"]),
+
     bookmark() {
       let aptcode =
         this.house.법정동 + this.house.지번 + this.house.년 + this.house.월;
