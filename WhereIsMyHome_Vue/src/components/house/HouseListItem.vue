@@ -4,11 +4,7 @@
     <ul>
       <li>{{ house.아파트 }}</li>
       <li>
-        <strong
-          >{{
-            (parseInt(house.거래금액.replace(",", "")) * 10000) | price
-          }}원</strong
-        >
+        <strong>{{ house.거래금액 }}원</strong>
       </li>
       <li>51.24㎡ 2층</li>
       <li>서초구 {{ house.법정동 }}</li>
@@ -36,29 +32,38 @@ import { mapState, mapActions, mapMutations } from "vuex";
 
 export default {
   name: "HouseListItem",
-  data() {},
+  data() {
+    return {};
+  },
   props: {
     house: Object,
   },
   methods: {
     ...mapActions(["addStar, getStars"]),
     ...mapMutations(["ADD_USER_STARS, SET_USER_STARS"]),
-
+    ...mapState(["loginUser"]),
     bookmark() {
-      let aptcode =
-        this.house.법정동 + this.house.지번 + this.house.년 + this.house.월;
+      console.log(this.$store.state.loginUser);
+      if (!this.$store.state.loginUser) {
+        alert("로그인하세요");
+        return;
+      }
+
+      console.log(this.house);
+
+      let aptcode = this.house.법정동 + this.house.지번 + this.house.년 + this.house.월;
 
       let newHouse = {
         houseCode: aptcode,
         houseName: this.house.아파트,
-        regCode: this.house.아파트,
-        dongName: this.house.아파트,
-        jibun: this.house.아파트,
-        price: this.house.아파트,
-        year: this.house.아파트,
-        month: this.house.아파트,
+        regCode: this.house.지역코드,
+        dongName: this.house.법정동,
+        jibun: this.house.지번,
+        price: this.house.거래금액,
+        year: this.house.년,
+        month: this.house.월,
         type: this.house.아파트,
-        userid: this.house.아파트,
+        userid: this.$store.state.loginUser.userid,
       };
       // console.log(newHouse);
       this.$store.dispatch("addStar", newHouse);

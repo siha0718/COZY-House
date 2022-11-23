@@ -1,14 +1,14 @@
 <template>
   <div class="card h-100">
     <!-- Product image-->
-    <img class="card-img-top" src="@/assets/2.jpg" alt="..." />
+    <img class="card-img-top" src="@/assets/2.jpg" alt="..." @click="test" />
     <!-- Product details-->
     <div class="card-body p-4">
       <div class="text-center">
         <!-- Product name-->
-        <h5 class="fw-bolder">{{ star.아파트 }}</h5>
+        <h5 class="fw-bolder">{{ star.houseName }}</h5>
         <!-- Product price-->
-        {{ star.거래금액 }}
+        {{ star.price }}
       </div>
     </div>
     <!-- Product actions-->

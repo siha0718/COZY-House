@@ -295,8 +295,7 @@ export default new Vuex.Store({
 
     ////////APT////////
     getSido({ commit }) {
-      const url =
-        "https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes";
+      const url = "https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes";
       let params = "regcode_pattern=" + "*00000000" + "&is_ignore_zero=true";
       fetch(`${url}?${params}`)
         .then((response) => response.json())
@@ -306,13 +305,8 @@ export default new Vuex.Store({
         });
     },
     getGugun({ commit }, sidoCode) {
-      const url =
-        "https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes";
-      let params =
-        "regcode_pattern=" +
-        sidoCode.substr(0, 2) +
-        "*00000" +
-        "&is_ignore_zero=true";
+      const url = "https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes";
+      let params = "regcode_pattern=" + sidoCode.substr(0, 2) + "*00000" + "&is_ignore_zero=true";
       fetch(`${url}?${params}`)
         .then((response) => response.json())
         .then((data) => {
@@ -326,7 +320,7 @@ export default new Vuex.Store({
       // 반드시 VUE_APP으로 시작해야 한다.
       //매매 완료정보 (공공 API)
       // console.log("aciton");
-      // console.log(option);
+      console.log(option);
 
       let house_list = [];
       if (option.dealType == "done" || "all") {
@@ -360,7 +354,7 @@ export default new Vuex.Store({
           .get(SERVICE_URL, { params })
           .then(({ data }) => {
             house_list = Object.values(data.response.body.items.item);
-
+            // console.log(house_list);
             if (option.dealType == "all") {
               let db_param;
               switch (option.houseType) {
@@ -419,6 +413,7 @@ export default new Vuex.Store({
                   console.log(err);
                 });
             } else {
+              //필터
               for (let i = 0; i < house_list.length; i++) {
                 if (option.inputSearch) {
                   if (!house_list[i].includes(option.inputSearch)) {
@@ -520,13 +515,9 @@ export default new Vuex.Store({
 
     ///////////////bookmark////////////////////////
     getStars: function ({ commit, state }) {
-      let params = {
-        userid: state.loginUser.userid,
-      };
       axios({
-        url: API_STAR_URL,
-        method: "get",
-        params: params,
+        url: API_STAR_URL + "/" + state.loginUser.userid,
+        method: "GET",
       })
         .then((res) => {
           if (res.data.msg == "success") {

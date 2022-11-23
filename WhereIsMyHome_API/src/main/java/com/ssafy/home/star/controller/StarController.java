@@ -27,7 +27,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 
-//http://localhost:9999/vue/swagger-ui.html
 @RestController
 @RequestMapping("/star")
 @Api("즐겨찾기 컨트롤러 ")
@@ -93,8 +92,9 @@ public class StarController {
 	@ApiOperation(value = "즐겨찾기 목록", notes = "즐겨찾기 정보를 반환한다.", response = List.class)
 	@GetMapping("/{userid}")
 	public ResponseEntity<Map<String, Object>> getStarList(
-			@PathVariable("aptCode") @ApiParam(value = "아파트 번호", required = true) String userid) throws Exception {
+			@PathVariable("userid") @ApiParam(value = "유저 아이디", required = true) String userid) throws Exception {
 		
+		System.out.println("@@@@@@@@@@@@@들어옴");
 		Map<String, Object> resMap = new HashMap<String, Object>();
 		HttpStatus status = null;
 		logger.info("listStar - 호출 {}" + userid);
@@ -102,7 +102,6 @@ public class StarController {
 	
 		try {			
 			starList = service.getStarList(userid);
-			System.out.println(">>>>>즐겨찾기 목록 사이즈 : " + starList.size());
 			
 			if(starList != null && starList.size() > 0) {
 				resMap.put("starList", starList);
