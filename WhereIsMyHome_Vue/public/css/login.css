@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Noto Sans KR", sans-serif;
+  overflow: hidden;
 }
 
 a {
@@ -20,11 +21,17 @@ li {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.1);
+  /* background: rgba(0, 0, 0, 0.1); */
+}
+
+.loginwrap {
+  /* width: 20%; */
+  height: fit-content;
+  margin-top: 50px;
 }
 
 .login {
-  width: 30%;
+  width: 20%;
   height: 600px;
   background: white;
   border-radius: 20px;
@@ -35,7 +42,7 @@ li {
 }
 
 h2 {
-  color: #005555;
+  color: #614d43;
   font-size: 2em;
 }
 .login_sns {
@@ -109,7 +116,7 @@ h2 {
   border: 0;
   outline: none;
   border-radius: 40px;
-  background: linear-gradient(to left, #005555, rgb(126 157 151));
+  background: linear-gradient(to left, #e7d7c9, #d4b2a7);
   color: white;
   font-size: 1.2em;
   letter-spacing: 2px;
@@ -128,7 +135,7 @@ h2 {
   border: 0;
   outline: none;
   border-radius: 40px;
-  background: linear-gradient(to left, #005555, rgb(126 157 151));
+  background: linear-gradient(to left, #e7d7c9, #d4b2a7);
   color: white;
   font-size: 1.2em;
   letter-spacing: 2px;
@@ -140,7 +147,7 @@ h2 {
   border: 0;
   outline: none;
   border-radius: 40px;
-  background: linear-gradient(to left, #005555, rgb(126 157 151));
+  background: linear-gradient(to left, #e7d7c9, #d4b2a7);
   color: white;
   font-size: 1.2em;
   letter-spacing: 2px;

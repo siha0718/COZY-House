@@ -2,19 +2,55 @@
   <div action="" id="form-join" class="joinForm">
     <h2>회원수정</h2>
     <div class="textForm">
-      <input name="userid" id="userId" type="text" class="id" v-model="user.userid" />
+      <input
+        name="userid"
+        id="userId"
+        type="text"
+        class="id"
+        v-model="user.userid"
+      />
     </div>
     <div class="textForm">
-      <input name="userpwd" id="userPwd" type="password" class="pw" v-model="user.userpwd" />
+      <input
+        name="userpwd"
+        id="userPwd"
+        type="password"
+        class="pw"
+        v-model="user.userpwd"
+      />
     </div>
     <div class="textForm">
-      <input name="username" id="userName" type="text" class="name" v-model="user.username" />
+      <input
+        name="username"
+        id="userName"
+        type="text"
+        class="name"
+        v-model="user.username"
+      />
     </div>
     <div class="textForm">
-      <input name="email" id="email" type="text" class="email" v-model="user.useremail" />
+      <input
+        name="email"
+        id="email"
+        type="text"
+        class="email"
+        v-model="user.useremail"
+      />
     </div>
-    <input type="submit" id="btn-edit" class="btn" value="E D I T" @click="doModify" />
-    <input type="button" id="btn-delete" class="btn" value="D E L E T E" @click="doDelete" />
+    <input
+      type="submit"
+      id="btn-edit"
+      class="btn"
+      value="E D I T"
+      @click="doModify"
+    />
+    <input
+      type="button"
+      id="btn-delete"
+      class="btn"
+      value="D E L E T E"
+      @click="doDelete"
+    />
   </div>
 </template>
 

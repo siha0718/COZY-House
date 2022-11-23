@@ -1,18 +1,18 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
-@font-face {
-  font-family: "Pretendard-Regular";
+/* @font-face {
+  font-family: "Noto Sans KR", sans-serif;
   src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
     format("woff");
   font-weight: 500;
   font-style: normal;
-}
+} */
 
 body {
   /*font-family: "Open Sans", sans-serif;*/
-  font-family: "Pretendard-Regular";
-  color: #444444;
+  font-family: "Noto Sans KR", sans-serif !important;
+  color: #614d43;
   position: relative;
   height: 1080px;
   overflow: scroll;
@@ -24,8 +24,12 @@ a {
 }
 
 a:hover {
-  color: none;
-  text-decoration: none;
+  color: none !important;
+  text-decoration: none !important;
+}
+
+ul {
+  list-style: none;
 }
 
 h1,
@@ -39,7 +43,7 @@ h6,
 }
 
 .navbar {
-  padding: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px !important;
 }
 
 button {
@@ -59,10 +63,110 @@ input::selection {
   background-color: #d4b2a7;
 }
 
+.container-fluid {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
 /**********************************************
                      start 
 ***********************************************/
 
+.backimg {
+  background-image: url("/src/assets/back.png");
+  background-size: cover;
+  /* opacity: 0.7; */
+  height: 551px;
+}
+
+.mainText {
+  margin-top: 125px !important;
+}
+
+.display-5 {
+  font-size: 25px !important;
+  font-weight: 500 !important;
+  color: #614d43;
+  text-shadow: #fff;
+  /* height: 250px; */
+}
+
+.mainBtn {
+  width: 131px;
+  padding: 0px 0px 0px 0px;
+  background-color: #ede9e3 !important;
+  color: #a38f85 !important;
+  border-color: #e7d7c9;
+  margin-top: 56px;
+}
+
+.mainInput {
+  background-color: #d4b2a7 !important;
+  border: #707070 !important;
+  margin-top: 36px;
+}
+
+.mainInput:focus {
+  outline: none;
+}
+
+.recommTitle {
+  font-size: 25px;
+  font-weight: bold;
+  color: #614d43;
+}
+
+.recommImg {
+  width: 210px;
+  height: 160px;
+}
+
+.recommImg img {
+  /* width: 210px; */
+
+  border-radius: 20%;
+}
+
+.recommBox {
+  display: flex;
+}
+
+.mainList {
+  font-size: 14px;
+}
+
+.mainList li {
+  margin-top: 5px;
+  color: #a38f85;
+}
+
+.mainList strong {
+  color: #614d43;
+  font-size: larger;
+}
+
+.leftSec {
+  border-right: solid 1px rgb(97, 77, 67, 0.3);
+  padding-left: 50px !important;
+  padding-right: 30px !important;
+}
+
+.liner {
+  border-bottom: solid 1px rgb(97, 77, 67, 0.3);
+}
+
+.infoList ul {
+  padding: 0px 0px 0px 0px;
+  margin-top: 30px;
+}
+
+.infoList ul li {
+  margin-top: 20px;
+}
+
+.info {
+  color: #a38f85;
+}
 .con {
   top: 0px;
   left: 0px;

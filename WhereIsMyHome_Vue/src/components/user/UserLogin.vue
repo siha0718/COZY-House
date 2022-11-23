@@ -1,8 +1,8 @@
 <template>
-  <div class="wrap">
+  <div class="wrap loginwrap">
     <div class="login">
       <h2>로그인</h2>
-      <div class="login_sns">
+      <!-- <div class="login_sns">
         <li>
           <a href="#"><i class="fab fa-instagram"></i></a>
         </li>
@@ -12,25 +12,38 @@
         <li>
           <a href="#"><i class="fab fa-twitter"></i></a>
         </li>
-      </div>
+      </div> -->
 
       <div class="login_id">
-        <h4>ID</h4>
-        <input type="text" class="form-control" id="id" name="userId" v-model="user.userid" />
+        <!-- <h4>ID</h4> -->
+        <input
+          type="text"
+          class="form-control"
+          id="id"
+          name="userId"
+          v-model="user.userid"
+          placeholder="ID"
+        />
       </div>
 
       <div class="login_pw">
-        <h4>Password</h4>
-        <input type="password" id="pw" name="userPwd" v-model="user.userpwd" />
+        <!-- <h4>Password</h4> -->
+        <input
+          type="password"
+          id="pw"
+          name="userPwd"
+          v-model="user.userpwd"
+          placeholder="PASSWORD"
+        />
       </div>
 
-      <div class="login_etc">
+      <div class="login_etc justify-content-center mt-3">
         <div class="checkbox">
           <input type="checkbox" name="remember" value="ok" /> 아이디 기억하기
         </div>
       </div>
 
-      <div class="submit">
+      <div class="submit mt-3">
         <input type="submit" value="submit" @click="dologin" />
       </div>
 

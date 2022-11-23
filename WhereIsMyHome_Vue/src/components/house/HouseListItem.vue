@@ -51,7 +51,8 @@ export default {
 
       console.log(this.house);
 
-      let aptcode = this.house.법정동 + this.house.지번 + this.house.년 + this.house.월;
+      let aptcode =
+        this.house.법정동 + this.house.지번 + this.house.년 + this.house.월;
 
       let newHouse = {
         houseCode: aptcode,

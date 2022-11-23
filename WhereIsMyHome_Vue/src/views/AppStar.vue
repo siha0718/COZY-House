@@ -2,13 +2,20 @@
   <!-- Section-->
   <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
-      <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+      <div
+        class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center cardList"
+      >
         <!-- start card -->
-
-        <div class="col mb-5 cardList" v-if="starList && starList.length != 0">
-          <star-list-item v-for="(star, index) in starList" :key="index" :star="star" />
+        <!-- col mb-5  -->
+        <!-- <div class="" v-if="starList && starList.length != 0"></div> -->
+        <!-- col mb-5 -->
+        <div class="" v-if="starList && starList.length != 0">
+          <star-list-item
+            v-for="(star, index) in starList"
+            :key="index"
+            :star="star"
+          ></star-list-item>
         </div>
-
         <div class="cardList" v-else>매물이 존재하지 않습니다.</div>
 
         <!-- end card -->
@@ -40,4 +47,11 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.cardList {
+  text-align: center;
+  /* float: left; */
+
+  /* width: fit-content; */
+}
+</style>
