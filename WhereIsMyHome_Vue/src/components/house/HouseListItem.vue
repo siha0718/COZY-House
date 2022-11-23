@@ -32,25 +32,37 @@
 </template>
 
 <script>
+import { mapState, mapActions, mapMutations } from "vuex";
+
 export default {
   name: "HouseListItem",
-  data() {
-    return {
-      isColor: false,
-    };
-  },
+  data() {},
   props: {
     house: Object,
   },
   methods: {
+    ...mapActions(["addStar, getStars"]),
+    ...mapMutations(["ADD_USER_STARS, SET_USER_STARS"]),
+
     bookmark() {
       let aptcode =
         this.house.법정동 + this.house.지번 + this.house.년 + this.house.월;
-      // console.log("법정동 : " + this.house.법정동);
-      // console.log("지번" + this.house.지번);
-      // console.log("년" + this.house.년);
-      // console.log("월" + this.house.월);
-      // console.log(aptcode);
+
+      let newHouse = {
+        houseCode: aptcode,
+        houseName: this.house.아파트,
+        regCode: this.house.아파트,
+        dongName: this.house.아파트,
+        jibun: this.house.아파트,
+        price: this.house.아파트,
+        year: this.house.아파트,
+        month: this.house.아파트,
+        type: this.house.아파트,
+        userid: this.house.아파트,
+      };
+      // console.log(newHouse);
+      this.$store.dispatch("addStar", newHouse);
+      // addStar(newHouse);
     },
   },
 };

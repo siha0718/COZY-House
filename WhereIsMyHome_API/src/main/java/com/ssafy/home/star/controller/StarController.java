@@ -19,8 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-
-import com.ssafy.home.star.dto.service.StarDto;
+import com.ssafy.home.star.dto.StarDto;
 import com.ssafy.home.star.service.StarService;
 
 import io.swagger.annotations.Api;

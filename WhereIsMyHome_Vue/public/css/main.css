@@ -20,11 +20,11 @@ body {
 
 a {
   text-decoration: none;
-  color: #fd680e;
+  color: none;
 }
 
 a:hover {
-  color: #ff8f4c;
+  color: none;
   text-decoration: none;
 }
 
@@ -53,6 +53,10 @@ input {
 
 input::selection {
   border: none;
+}
+
+.btn {
+  background-color: #d4b2a7;
 }
 
 /**********************************************

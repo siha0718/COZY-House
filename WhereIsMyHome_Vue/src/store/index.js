@@ -295,7 +295,8 @@ export default new Vuex.Store({
 
     ////////APT////////
     getSido({ commit }) {
-      const url = "https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes";
+      const url =
+        "https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes";
       let params = "regcode_pattern=" + "*00000000" + "&is_ignore_zero=true";
       fetch(`${url}?${params}`)
         .then((response) => response.json())
@@ -305,8 +306,13 @@ export default new Vuex.Store({
         });
     },
     getGugun({ commit }, sidoCode) {
-      const url = "https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes";
-      let params = "regcode_pattern=" + sidoCode.substr(0, 2) + "*00000" + "&is_ignore_zero=true";
+      const url =
+        "https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes";
+      let params =
+        "regcode_pattern=" +
+        sidoCode.substr(0, 2) +
+        "*00000" +
+        "&is_ignore_zero=true";
       fetch(`${url}?${params}`)
         .then((response) => response.json())
         .then((data) => {
