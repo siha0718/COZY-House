@@ -1,84 +1,32 @@
 <template>
   <div class="leftSelect">
-    <input
-      class="searchInput"
-      placeholder="지역, 지하철역, 학교 검색"
-      v-model="inputSearch"
-    />
+    <input class="searchInput" placeholder="지역, 지하철역, 학교 검색" v-model="inputSearch" />
 
     <div class="selectBtn mt-4">
-      <div
-        class="btn-group selectBtn selectBtnIn"
-        role="group"
-        aria-label="Basic checkbox toggle button group"
-      >
-        <input
-          type="checkbox"
-          class="btn-check"
-          id="btncheck1"
-          autocomplete="off"
-          @click="houseType = `apt`"
-        />
+      <div class="btn-group selectBtn selectBtnIn" role="group" aria-label="Basic checkbox toggle button group">
+        <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off" @click="houseType = `apt`" />
         <label class="btn" for="btncheck1">아파트</label>
       </div>
 
-      <div
-        class="mt-3 btn-group selectBtn selectBtnIn"
-        role="group"
-        aria-label="Basic checkbox toggle button group"
-      >
-        <input
-          type="checkbox"
-          class="btn-check col-6"
-          id="btncheck2"
-          autocomplete="off"
-          @click="houseType = `ot`"
-        />
+      <div class="mt-3 btn-group selectBtn selectBtnIn" role="group" aria-label="Basic checkbox toggle button group">
+        <input type="checkbox" class="btn-check col-6" id="btncheck2" autocomplete="off" @click="houseType = `ot`" />
         <label class="btn" for="btncheck2">원룸,투룸</label>
 
-        <input
-          type="checkbox"
-          class="btn-check col-6"
-          id="btncheck3"
-          autocomplete="off"
-          @click="houseType = `villa`"
-        />
+        <input type="checkbox" class="btn-check col-6" id="btncheck3" autocomplete="off" @click="houseType = `villa`" />
         <label class="btn" for="btncheck3">빌라</label>
       </div>
     </div>
 
     <div class="selectBtn mt-4">
       <div class="mt-5">거래유형</div>
-      <div
-        class="btn-group selectBtn selectBtnIn mt-3"
-        role="group"
-        aria-label="Basic checkbox toggle button group"
-      >
-        <input
-          type="checkbox"
-          class="btn-check"
-          id="btncheck4"
-          autocomplete="off"
-          @click="dealType = `done`"
-        />
+      <div class="btn-group selectBtn selectBtnIn mt-3" role="group" aria-label="Basic checkbox toggle button group">
+        <input type="checkbox" class="btn-check" id="btncheck4" autocomplete="off" @click="dealType = `done`" />
         <label class="btn col-4" for="btncheck4">완료</label>
 
-        <input
-          type="checkbox"
-          class="btn-check"
-          id="btncheck5"
-          autocomplete="off"
-          @click="dealType = `on`"
-        />
+        <input type="checkbox" class="btn-check" id="btncheck5" autocomplete="off" @click="dealType = `on`" />
         <label class="btn col-4" for="btncheck5">실거래</label>
 
-        <input
-          type="checkbox"
-          class="btn-check"
-          id="btncheck6"
-          autocomplete="off"
-          @click="dealType = `all`"
-        />
+        <input type="checkbox" class="btn-check" id="btncheck6" autocomplete="off" @click="dealType = `all`" />
         <label class="btn col-4" for="btncheck6">전체</label>
       </div>
     </div>
@@ -103,17 +51,8 @@
         @change="gugunList"
         class="form-select form-select-sm col-3"
       ></b-form-select>
-      <b-form-select
-        v-model="gugunCode"
-        :options="guguns"
-        class="form-select form-select-sm col-3"
-      ></b-form-select>
-      <b-form-select
-        class="form-select form-select-sm col-3"
-        label
-        for="시/도"
-        v-model="year"
-      >
+      <b-form-select v-model="gugunCode" :options="guguns" class="form-select form-select-sm col-3"></b-form-select>
+      <b-form-select class="form-select form-select-sm col-3" label for="시/도" v-model="year">
         <option>2014년</option>
         <option>2015년</option>
         <option>2016년</option>
@@ -124,12 +63,7 @@
         <option>2021년</option>
         <option>2022년</option>
       </b-form-select>
-      <b-form-select
-        class="form-select form-select-sm col-3"
-        label
-        for="시/도"
-        v-model="month"
-      >
+      <b-form-select class="form-select form-select-sm col-3" label for="시/도" v-model="month">
         <option>01월</option>
         <option>02월</option>
         <option>03월</option>
@@ -240,12 +174,7 @@ export default {
       if (this.sidoCode) this.getGugun(this.sidoCode);
     },
     searchApt() {
-      if (
-        this.sidoCode === "" ||
-        this.gugunCode === "" ||
-        this.year === "" ||
-        this.month === ""
-      ) {
+      if (this.sidoCode === "" || this.gugunCode === "" || this.year === "" || this.month === "") {
         alert("필수 입력 시도 & 구군 & 년/월");
         return;
       }
@@ -261,7 +190,7 @@ export default {
         priceMax: this.priceMax,
       };
       // console.log("search시작 option은");
-      // console.log(option);
+      // console.log("서치아파트옵션", option);
       this.getHouseList(option);
       // eventBus.$emit("housList", this.$store.state.houses);
     },

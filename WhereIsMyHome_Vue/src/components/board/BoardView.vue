@@ -11,7 +11,7 @@
           <div class="d-flex align-items-center mt-lg-5 mb-4">
             <img class="img-fluid rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." />
             <div class="ms-3">
-              <div class="fw-bold">{{board.userid}}</div>
+              <div class="fw-bold">{{ board.userid }}</div>
               <div class="text-muted">News, Business</div>
             </div>
           </div>
@@ -24,30 +24,29 @@
               <!-- Post title-->
               <h1 class="boardTitle mb-1">{{ board.subject }}</h1>
               <!-- Post meta content-->
-              <div class="text-muted fst-italic mt-2 mb-2">{{board.regtime}}</div>
-             
+              <div class="text-muted fst-italic mt-2 mb-2">{{ board.regtime }}</div>
             </header>
-        
-            
+
             <!-- Post content-->
             <section class="mb-5 postSec">
-              <p class="fs-5 mt-4 mb-4">{{board.content}}</p>              
+              <p class="fs-5 mt-4 mb-4">{{ board.content }}</p>
             </section>
           </article>
-
 
           <!-- Comments section-->
           <section>
             <div class="card bg-light commBg">
               <div class="card-body">
                 <!-- Comment form-->
-                <form class="mb-4"><textarea class="form-control" rows="3"
-                    placeholder="댓글을 남겨주세요..."></textarea></form>
+                <form class="mb-4">
+                  <textarea class="form-control" rows="3" placeholder="댓글을 남겨주세요..."></textarea>
+                </form>
                 <!-- Comment with nested comments-->
                 <div class="d-flex mb-4">
                   <!-- Parent comment-->
-                  <div class="flex-shrink-0"><img class="rounded-circle"
-                      src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                  <div class="flex-shrink-0">
+                    <img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." />
+                  </div>
                   <div class="ms-3">
                     <div class="fw-bold">Siha Kim</div>
                     If you're going to lead a space frontier, it has to be government; it'll never be private
@@ -55,8 +54,9 @@
                     risks.
                     <!-- Child comment 1-->
                     <div class="d-flex mt-4">
-                      <div class="flex-shrink-0"><img class="rounded-circle"
-                          src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                      <div class="flex-shrink-0">
+                        <img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." />
+                      </div>
                       <div class="ms-3">
                         <div class="fw-bold">Dong Hyeck Choi</div>
                         And under those conditions, you cannot establish a capital-market evaluation of that enterprise.
@@ -65,8 +65,9 @@
                     </div>
                     <!-- Child comment 2-->
                     <div class="d-flex mt-4">
-                      <div class="flex-shrink-0"><img class="rounded-circle"
-                          src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                      <div class="flex-shrink-0">
+                        <img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." />
+                      </div>
                       <div class="ms-3">
                         <div class="fw-bold">Siha Kim</div>
                         When you put money directly to a problem, it makes a good headline.
@@ -76,8 +77,9 @@
                 </div>
                 <!-- Single comment-->
                 <div class="d-flex">
-                  <div class="flex-shrink-0"><img class="rounded-circle"
-                      src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                  <div class="flex-shrink-0">
+                    <img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." />
+                  </div>
                   <div class="ms-3">
                     <div class="fw-bold">admin</div>
                     When I look at the universe and all the ways the universe wants to kill us, I find it hard to
@@ -86,6 +88,7 @@
                 </div>
               </div>
             </div>
+            <div @click="modify">수정하기@@</div>
           </section>
         </div>
       </div>
@@ -112,6 +115,8 @@ export default {
       } else if (this.$store.state.loginUser.userclass == 0) {
         alert("운영자 접근");
         this.$router.push("/board/modify");
+      } else {
+        alert("접근불가");
       }
     },
   },
@@ -121,7 +126,6 @@ export default {
 <style>
 @import "../../../public/css/main.css";
 @import "../../../public/css/board.css";
-
 
 .absBtn label {
   text-align: left;
@@ -136,11 +140,11 @@ export default {
   margin: auto;
 }
 
-.postSec{
-  margin-top:40px;
+.postSec {
+  margin-top: 40px;
   /*border: 0.01rem solid rgb(44, 48, 52, 0.3);*/
-  padding : 10px 10px 10px 10px;
-  height:max-content;
+  padding: 10px 10px 10px 10px;
+  height: max-content;
 }
 
 /* .board{

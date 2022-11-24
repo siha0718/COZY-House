@@ -21,7 +21,6 @@
       </div>
       <div class="text-center" v-else>게시글이 없습니다.</div>
     </div>
-
   </section>
 </template>
 
@@ -63,7 +62,7 @@ export default {
   },
 
   created() {
-    console.log("보드크리에이트");
+    // console.log("보드크리에이트");
     this.getBoardList();
   },
   computed: {
@@ -76,7 +75,7 @@ export default {
       if (!this.loginUser()) {
         alert("로그인하세요");
       } else {
-        this.$router.push({ name: "boardwrite" });
+        this.$router.push("/board/write");
       }
     },
     view(board) {
@@ -89,5 +88,4 @@ export default {
 <style scoped>
 @import "../../../public/css/main.css";
 @import "../../../public/css/board.css";
-
 </style>

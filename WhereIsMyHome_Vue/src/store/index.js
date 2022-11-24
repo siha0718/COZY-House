@@ -259,8 +259,10 @@ export default new Vuex.Store({
       })
         .then((res) => {
           if (res.data.msg == "success") {
+            // console.log("글작성 성공, 라우터 list로 이동");
             commit("CREATE_BOARD", board);
-            router.push("/board");
+            alert("글 작성 성공");
+            router.push("/board/list");
           } else {
             alert("글 작성 실패");
           }
@@ -454,6 +456,7 @@ export default new Vuex.Store({
                   }
                 }
               }
+              // console.log("요기", house_list);
               commit("SET_HOUSE_LIST", house_list);
               eventBus.$emit("housList", house_list);
             }

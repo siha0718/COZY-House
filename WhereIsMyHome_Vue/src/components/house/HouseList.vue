@@ -101,6 +101,7 @@
 <script>
 import { mapState, mapActions, mapMutations } from "vuex";
 import HouseListItem from "@/components/house/HouseListItem.vue";
+import { eventBus } from "../../main.js";
 
 export default {
   name: "HouseList",
@@ -158,6 +159,11 @@ export default {
 
       // this.house.법정동 + this.house.지번 + this.house.년 + this.house.월;
     },
+  },
+  created() {
+    eventBus.$on("houseList", function (houseList) {
+      this.houseList = houseList;
+    });
   },
 };
 </script>
