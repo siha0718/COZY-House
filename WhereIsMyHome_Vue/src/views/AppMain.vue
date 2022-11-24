@@ -44,9 +44,7 @@
             <div class="">
               <div class="row gx-5 row-cols-1 row-cols-md-2">
                 <div class="col mb-5 h-100 recommBox">
-                  <div
-                    class="feature bg-primary bg-gradient text-white rounded-3 mb-3"
-                  >
+                  <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
                     <i class="bi bi-collection"></i>
                   </div>
                   <div class="recommImg">
@@ -61,9 +59,7 @@
                   </ul>
                 </div>
                 <div class="col mb-5 h-100 recommBox">
-                  <div
-                    class="feature bg-primary bg-gradient text-white rounded-3 mb-3"
-                  >
+                  <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
                     <i class="bi bi-collection"></i>
                   </div>
                   <div class="recommImg">
@@ -78,9 +74,7 @@
                   </ul>
                 </div>
                 <div class="col mb-5 h-100 recommBox">
-                  <div
-                    class="feature bg-primary bg-gradient text-white rounded-3 mb-3"
-                  >
+                  <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
                     <i class="bi bi-collection"></i>
                   </div>
                   <div class="recommImg">
@@ -95,9 +89,7 @@
                   </ul>
                 </div>
                 <div class="col mb-5 h-100 recommBox">
-                  <div
-                    class="feature bg-primary bg-gradient text-white rounded-3 mb-3"
-                  >
+                  <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3">
                     <i class="bi bi-collection"></i>
                   </div>
                   <div class="recommImg">

@@ -102,17 +102,9 @@ public class StarController {
 	
 		try {			
 			starList = service.getStarList(userid);
-			
-			if(starList != null && starList.size() > 0) {
-				resMap.put("starList", starList);
-				resMap.put("msg", SUCCESS);
-				status = HttpStatus.ACCEPTED;
-			}
-			else {
-				resMap.put("msg", "즐겨찾기 결과가 없습니다.");
-				status = HttpStatus.ACCEPTED;
-			}
-			
+			resMap.put("starList", starList);
+			resMap.put("msg", SUCCESS);
+			status = HttpStatus.ACCEPTED;
 			
 		} catch (Exception e) {
 			logger.error("즐겨찾기 조회 실패 : {}", e);
