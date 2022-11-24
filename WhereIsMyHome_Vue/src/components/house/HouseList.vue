@@ -83,7 +83,7 @@
       id="offcanvasRight"
       aria-labelledby="offcanvasRightLabel"
     > -->
-    <div class="offcanvas-header">
+    <div class="offcanvas-header" data-bs-scroll="true">
       <h5 class="" @click="test">지역 목록</h5>
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>

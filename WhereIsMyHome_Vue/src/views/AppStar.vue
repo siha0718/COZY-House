@@ -15,7 +15,7 @@
             v-for="(star, index) in starList"
             :key="index"
             :star="star"
-            class="col-4"
+            class="col-3"
           ></star-list-item>
         </div>
         <div class="cardList" v-else>매물이 존재하지 않습니다.</div>

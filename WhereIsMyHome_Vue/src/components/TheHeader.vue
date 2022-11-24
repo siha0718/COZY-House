@@ -1,26 +1,17 @@
 <template>
-  <nav class="navbar navbar-expand-sm row">
-    <div class="container-fluid headernav">
-      <div class="col-3">
+  <nav class="navbar navbar-expand-lg headerNav">
+    <div class="container-fluid px-5">
+      <div class="collapse navbar-collapse justify-content-center">
         <router-link class="navbar-brand logo" :to="'/'">
-          <img src="@/assets/siha_logo.jpg" alt="" class="logoImg" />
-        </router-link>
-      </div>
+            <img src="@/assets/siha_logo.jpg" alt="" class="logoImg" />
+          </router-link>
 
-      <!-- <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#collapsibleNavbar"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div
-        class="collapse navbar-collapse justify-content-center"
-        id="collapsibleNavbar"
-      > -->
-      <div class="col-6">
-        <ul class="navbar-nav justify-content-center">
+      </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+          class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <router-link class="nav-link" :to="'/house'">HOUSE</router-link>
           </li>
@@ -35,8 +26,7 @@
           </li>
         </ul>
       </div>
-
-      <div class="col-2">
+      <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
         <ul class="navbar-nav nav" v-if="loginUser">
           <li class="nav-item justify-content-end">
             <div class="nav-link">"{{ loginUser.username }}"님 어서오세요</div>
@@ -91,4 +81,10 @@ export default {
 @import "../../public/css/main.css";
 @import "../../public/css/house-list.css";
 @import "../../public/css/house-search.css";
+
+.headerNav {
+  height:80px;
+}
+
+
 </style>

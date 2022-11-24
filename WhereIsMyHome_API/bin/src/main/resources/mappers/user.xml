@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.home.user.dao.UserMapper">
+
+	<!-- 유저클래스  -->
+	<select id="getclass" parameterType="String" resultType="int">
+		SELECT userclass 
+		FROM user
+		where userid = #{userid}
+	</select>
+	
+	<!-- 모든유저정보 -->
+	<select id="selectAll" resultType="UserDto">
+		SELECT * FROM user
+	</select>
+	
+	<!-- 회원가입  -->
+	<insert id="regist" parameterType="UserDto">
+		INSERT INTO user
+		(userid, userpwd, username, useremail,userclass)
+		VALUES(#{userid}, #{userpwd}, #{username}, #{useremail}, #{userclass})
+	</insert>
+	
+	<!-- 로그인  -->
+	<select id="login" parameterType="UserDto" resultType="UserDto">
+		SELECT userid, userpwd, username, useremail, joindate, userclass
+		FROM user 
+		WHERE userid = #{userid} and userpwd = #{userpwd}
+	</select>
+	
+	<!-- 유저정보  -->
+	<select id="info" parameterType="String" resultType="UserDto">
+		SELECT userid, userpwd, username, useremail, joindate, userclass
+		FROM user 
+		WHERE userid = #{userid}
+	</select>
+	
+	<!-- 유저 삭제 -->
+	<delete id="delete" parameterType="UserDto">
+		delete from user
+		where userid = #{userid}	
+	</delete>
+	
+	<!-- 유저 수정 -->	
+	<update id="modify" parameterType="UserDto">
+		update user
+		set username = #{username}, userpwd = #{userpwd}, useremail = #{useremail}
+		where userid = #{userid}
+	</update>
+	
+	<!-- 아이디개수  -->
+	<select id="countId" parameterType="String" resultType="int">
+		SELECT COUNT(userid)
+		FROM user 
+		WHERE userid = #{userid}
+	</select>
+</mapper>

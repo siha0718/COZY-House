@@ -1,6 +1,6 @@
 <template>
   <div class="col mb-5">
-    <div class="card h-100">
+    <div class="card h-100 shadow">
       <!-- Product image-->
       <img class="card-img-top" src="@/assets/2.jpg" alt="..." @click="test" />
       <!-- Product details-->
@@ -54,4 +54,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.shadow {
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%) !important;
+}
+</style>
