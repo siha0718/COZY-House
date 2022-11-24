@@ -69,18 +69,11 @@ const routes = [
     path: "/house",
     name: "house",
     component: AppHouse,
-    children: [
-      {
-        path: "list",
-        name: "houselist",
-        component: () => import("@/components/house/HouseList"),
-      },
-      {
-        path: "detail",
-        name: "housedetail",
-        component: () => import("@/components/house/HouseDetail"),
-      },
-    ],
+  },
+  {
+    path: "/detail",
+    name: "detail",
+    component: () => import("@/components/house/HouseDetail"),
   },
   {
     path: "/star",

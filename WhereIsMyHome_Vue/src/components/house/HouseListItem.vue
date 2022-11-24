@@ -1,6 +1,6 @@
 <template>
   <div class="list">
-    <img src="@/assets/2.jpg" alt="" />
+    <img src="@/assets/2.jpg" alt="" @click="detail" />
     <ul>
       <li>{{ house.아파트 }}</li>
       <li>
@@ -69,6 +69,10 @@ export default {
       // console.log(newHouse);
       this.$store.dispatch("addStar", newHouse);
       // addStar(newHouse);
+    },
+    detail() {
+      this.$store.commit("SET_DETAIL_HOUSE", this.house);
+      this.$router.push("/detail");
     },
   },
 };

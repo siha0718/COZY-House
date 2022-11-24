@@ -1,7 +1,7 @@
 <template>
   <div>
     디테일입니다!
-
+    {{ house.아파트 }}
     <house-reply></house-reply>
   </div>
 </template>
@@ -19,6 +19,12 @@ export default {
 
   data() {
     return {};
+  },
+  created() {
+    // if (!this.house) {
+    //   alert("잘못된 접근");
+    //   this.$router.push("/");
+    // }
   },
   computed: {
     ...mapState(["house"]),
