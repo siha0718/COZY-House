@@ -14,7 +14,9 @@
 
 .btn {
     width: 48%;
-    background-color: #e7d7c9;
+    background: linear-gradient(to left, #e7d7c9, #d4b2a7);
+
+    /*background-color: #e7d7c9;*/
 }
 
 .btn:hover{
@@ -28,8 +30,9 @@
 
 .writeBtn{
     width : 150px;
-    border-color: 1px solid #d4b2a7!important;
+    /*border-color: 1px solid #d4b2a7!important;*/
     background-color: #d4b2a7;
+    
     color: #fff;
 }
 

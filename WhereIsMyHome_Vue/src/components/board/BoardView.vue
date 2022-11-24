@@ -88,9 +88,12 @@
                 </div>
               </div>
             </div>
-            <div @click="modify">수정하기@@</div>
           </section>
+          <div class="row justify-content-center mt-5">
+                <button class="col-6 btn btn-lg boardBtn" id="submitButton" @click.prevent="modify">Modify</button>
         </div>
+        </div>
+        
       </div>
     </div>
   </section>

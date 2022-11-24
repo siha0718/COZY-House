@@ -12,7 +12,8 @@
     </ul>
     <div class="star" @click="bookmark">
       <div v-if="this.staron == `on`">
-        <svg
+        <div class="starpngAfter">
+          <!--<svg
           xmlns="http://www.w3.org/2000/svg"
           width="40"
           height="40"
@@ -23,15 +24,20 @@
           <path
             d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"
           />
-        </svg>
+        </svg>-->
+      </div>
+        
       </div>
       <div v-else>
-        <svg class="starsvg" height="40" viewBox="0 0 40 40" width="40" xmlns="http://www.w3.org/2000/svg">
+        <div class="starpng">
+          <!--<svg class="starsvg" height="40" viewBox="0 0 40 40" width="40" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M34 6H14c-2.21 0-3.98 1.79-3.98 4L10 42l14-6 14 6V10c0-2.21-1.79-4-4-4zm0 30l-10-4.35L14 36V10h20v26z"
           />
           <path d="M0 0h48v48H0z" fill="none" />
-        </svg>
+        </svg>-->
+      </div>
+        
       </div>
     </div>
   </div>

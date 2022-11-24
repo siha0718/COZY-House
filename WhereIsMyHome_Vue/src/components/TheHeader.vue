@@ -19,9 +19,6 @@
             <a href="#" @click.prevent="star" class="nav-link">즐겨찾기</a>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" :to="'/house'">매물올리기</router-link>
-          </li>
-          <li class="nav-item">
             <router-link class="nav-link" :to="'/board'">건의사항</router-link>
           </li>
         </ul>
