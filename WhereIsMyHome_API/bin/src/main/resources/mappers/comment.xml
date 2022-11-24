@@ -4,7 +4,7 @@
 
 <mapper namespace="com.ssafy.home.comment.dao.CommentMapper">
 
-	<insert id="writeComment" parameterType="CommentDto">
+	<insert id="writeComment" parameterType="CommentDto" useGeneratedKeys="true" keyColumn="cmNum" keyProperty="cmNum">
 		INSERT INTO comment (content,houseCode,userid)
 		VALUES (#{content}, #{houseCode}, #{userid})
 	</insert>
@@ -19,10 +19,9 @@
 		SELECT 	cmNum, content, houseCode, userid, time
 		FROM comment
 		WHERE houseCode = #{houseCode} AND userid =#{userid}
-		ORDER BY date DESC;
 	</select>
 	
-	<delete id="deleteComment" parameterType="CommentDto">
+	<delete id="deleteComment" parameterType="int">
 		delete from comment
 		where cmNum = #{cmNum}
 	</delete>
