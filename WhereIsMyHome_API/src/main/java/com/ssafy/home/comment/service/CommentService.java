@@ -14,7 +14,7 @@ public interface CommentService {
 	public int modifyComment(CommentDto commentDto);
 
 	public List<CommentDto> getCommentList(Map<String, String> map);
-	
-	public int deleteComment(CommentDto commentDto);
+
+	public int deleteComment(int cmNum);
 
 }

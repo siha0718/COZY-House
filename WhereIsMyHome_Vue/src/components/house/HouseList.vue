@@ -85,16 +85,11 @@
     > -->
     <div class="offcanvas-header">
       <h5 class="" @click="test">지역 목록</h5>
-      <button
-        type="button"
-        class="btn-close text-reset"
-        data-bs-dismiss="offcanvas"
-        aria-label="Close"
-      ></button>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-      <div class="areaList" v-if="houses && houses.length != 0">
-        <house-list-item v-for="(house, index) in houses" :key="index" :house="house" />
+      <div class="areaList" v-if="this.houseList && this.houseList.length != 0">
+        <house-list-item v-for="(house, index) in this.houseList" :key="index" :house="house" />
       </div>
       <div class="areaList" v-else>매물이 존재하지 않습니다.</div>
     </div>
@@ -121,22 +116,39 @@ export default {
     ...mapState(["houses", "starList", "loginUser"]),
   },
   watch: {
-    houses: function () {
+    houses: async function () {
       if (!this.loginUser) {
         return;
       }
+      console.log("로그인확인", this.loginUser);
       //디비접근해서 현재유저의 즐겨찾기목록 다긁어오기
       //그 긁어온거랑 하우스 정보 비교해서 일치하면 즐겨찾기 된걸로 표시해서 this.houseList에 저장하기
-      this.$store.dispatch(getStars);
-      console.log(this.starList);
+      this.$store.dispatch("getStars");
+      let ho = this.houses;
+      let st = this.starList;
+      console.log(ho);
+      console.log(st.length);
 
-      // for (let i = 0; i < this.houses.length; i++){
-      //   for (let j = 0; j < this.starList.length; j++){
-      //     if (houses[i].법정동 == starList[j].houseCode) {
-
-      //     }
-      //   }
-      // }
+      this.houseList = [];
+      for (let i = 0; i < ho.length; i++) {
+        this.houseList.push(ho[i]);
+        for (let j = 0; j < st.length; j++) {
+          let codes = st[j].houseCode.split("뷁");
+          if (
+            this.houseList[i].법정동 == codes[0] &&
+            this.houseList[i].지번 == codes[1] &&
+            this.houseList[i].년 == codes[2] &&
+            this.houseList[i].월 == codes[3] &&
+            this.houseList[i].거래금액 == codes[4]
+          ) {
+            this.houseList[i].star = "on";
+            break;
+          } else {
+            this.houseList[i].star = "off";
+          }
+        }
+      }
+      console.log(this.houseList);
     },
   },
   methods: {

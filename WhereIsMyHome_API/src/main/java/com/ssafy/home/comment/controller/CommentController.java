@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.home.comment.dto.CommentDto;
@@ -66,6 +67,7 @@ public class CommentController {
 			logger.info("writeComment - 호출");
 			if (res == 1) {
 				resMap.put("msg", SUCCESS);
+				resMap.put("cmNum", commentDto.getCmNum());
 				status = HttpStatus.ACCEPTED;
 			}
 			else {
@@ -125,10 +127,10 @@ public class CommentController {
 	
  
 	@ApiOperation(value = "댓글목록", notes = "댓글의 정보를 반환한다.", response = List.class)
-	@GetMapping("/{houseCode}/{userid}")
+	@GetMapping
 	public ResponseEntity<Map<String, Object>> getCommentList(
-			@PathVariable("houseCode") @ApiParam(value = "집 고유 번호", required = true) String houseCode,
-			@PathVariable("userid") @ApiParam(value = "유저아이디", required = true) String userid) throws Exception {
+			@RequestParam @ApiParam(value = "집 고유 번호", required = true) String houseCode,
+			@RequestParam @ApiParam(value = "유저아이디", required = true) String userid) throws Exception {
 		Map<String, Object> resMap = new HashMap<String, Object>();
 		HttpStatus status = null;
 		logger.info("listComment - 호출");
@@ -141,16 +143,9 @@ public class CommentController {
 			commentList = service.getCommentList(map);
 			System.out.println(">>>>>댓글목록 사이즈 : " + commentList.size());
 			
-			if(commentList != null && commentList.size() > 0) {
-				resMap.put("commentList", commentList);
-				resMap.put("msg", SUCCESS);
-				status = HttpStatus.ACCEPTED;
-			}
-			else {
-				resMap.put("msg", "댓글이 없습니다.");
-				status = HttpStatus.ACCEPTED;
-			}
-			
+			resMap.put("commentList", commentList);
+			resMap.put("msg", SUCCESS);
+			status = HttpStatus.ACCEPTED;
 			
 		} catch (Exception e) {
 			logger.error("댓글 조회 실패 : {}", e);
@@ -170,15 +165,14 @@ public class CommentController {
 	@ApiOperation(value = "댓글삭제", notes = " 해당하는 댓글의 정보를 삭제한다. 그리고 DB삭제 성공여부에 따라 'success' 또는 'fail' 문자열을 반환한다.", response = String.class)
 	@DeleteMapping
 	public ResponseEntity<Map<String, Object>> deleteComment(
-			@RequestBody @ApiParam(value = "수정할 글정보.", required = true) CommentDto commentDto) throws Exception {
+			@RequestBody @ApiParam(value = "수정할 글정보.", required = true) String cmNum) throws Exception {
 			
 		Map<String, Object> resMap = new HashMap<String, Object>();
 		HttpStatus status = null;	
-		logger.info("deleteComment - 호출 {}" + commentDto);
+		logger.info("deleteComment - 호출 {}" + cmNum);
 		
 		try {
-			
-			int res = service.deleteComment(commentDto);
+			int res = service.deleteComment(Integer.parseInt(cmNum));
 			
 			if (res == 1) {
 				resMap.put("msg", SUCCESS);

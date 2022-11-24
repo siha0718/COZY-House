@@ -16,7 +16,7 @@ public interface CommentMapper {
 
 	public List<CommentDto> getCommentList(Map<String, String> map);
 	
-	public int deleteComment(CommentDto commentDto);
+	public int deleteComment(int cmNum);
 
 	public int selectCommentTotalCount(int aptCode);
 	

@@ -9,15 +9,15 @@
           <!-- Product name-->
           <h5 class="fw-bolder">{{ star.houseName }}</h5>
           <!-- Product price-->
-          {{ star.price }}
+          <div>가격 : {{ star.price }}</div>
+          <div>동 : {{ star.dongName }}</div>
+          <div>지번 : {{ star.jibun }}</div>
         </div>
       </div>
       <!-- Product actions-->
       <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
         <div class="text-center">
-          <a class="btn btn-outline-dark mt-auto" href="#" @click.prevent="deleteStar"
-            >즐겨찾기 해제</a
-          >
+          <a class="btn btn-outline-dark mt-auto" href="#" @click.prevent="deleteStar">즐겨찾기 해제</a>
         </div>
       </div>
     </div>

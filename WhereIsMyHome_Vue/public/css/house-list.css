@@ -71,6 +71,9 @@ HEAD .starsvg {
 .starsvg:hover {
   background-color: #a38f89;
 }
+.bi bi-boo kmark-fill:hover {
+  background-color: #a38f89;
+}
 
 .map {
   width: 1920px;

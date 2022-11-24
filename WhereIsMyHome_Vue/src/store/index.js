@@ -28,6 +28,7 @@ export default new Vuex.Store({
     guguns: [{ value: null, text: "선택하세요" }],
     houses: [],
     house: null,
+    houseCode: null,
     positions: [],
     ////////STAR////////
     starList: [],
@@ -101,7 +102,6 @@ export default new Vuex.Store({
       state.houses = houses;
     },
     SET_DETAIL_HOUSE(state, house) {
-      // console.log("Mutations", house);
       state.house = house;
     },
     SET_USER_STARS(state, starList) {
@@ -120,6 +120,21 @@ export default new Vuex.Store({
     },
     SET_COMMENT_LIST(state, commentList) {
       state.commentList = commentList;
+    },
+    ADD_COMMENT_LIST(state, comment) {
+      state.commentList.push(comment);
+    },
+    DELETE_COMMENT(state, cmNum) {
+      for (let i = 0; i < state.commentList.length; i++) {
+        if (state.commentList[i].cmNum == cmNum) {
+          state.commentList.splice(i, 1);
+          break;
+        }
+      }
+    },
+    SET_HOUSE_CODE(state, houseCode) {
+      console.log("SET_HOUSE_CODE", houseCode);
+      state.houseCode = houseCode;
     },
   },
   actions: {
@@ -345,9 +360,7 @@ export default new Vuex.Store({
         }
         const params = {
           LAWD_CD: option.gugunCode.substr(0, 5),
-          DEAL_YMD:
-            option.year.substr(0, option.year.length - 1) +
-            option.month.substr(0, option.month.length - 1),
+          DEAL_YMD: option.year.substr(0, option.year.length - 1) + option.month.substr(0, option.month.length - 1),
           serviceKey: decodeURIComponent(SERVICE_KEY),
           numOfRows: 20,
         };
@@ -516,7 +529,7 @@ export default new Vuex.Store({
     },
 
     ///////////////bookmark////////////////////////
-    getStars: function ({ commit, state }) {
+    getStars: async function ({ commit, state }) {
       axios({
         url: API_STAR_URL + "/" + state.loginUser.userid,
         method: "GET",
@@ -570,6 +583,7 @@ export default new Vuex.Store({
 
     ///////////////comment////////////////////////
     addComment: function ({ commit, state }, comment) {
+      // console.log("액션애드코멘트", comment);
       axios({
         url: API_COMMNET_URL,
         method: "post",
@@ -578,6 +592,10 @@ export default new Vuex.Store({
         .then((res) => {
           if (res.data.msg == "success") {
             alert("댓글 작성 성공");
+            comment.cmNum = res.data.cmNum;
+            console.log("받아온 num", res.data.cmNum);
+            console.log(comment);
+            commit("ADD_COMMENT_LIST", comment);
           } else {
             alert("댓글 작성 실패");
           }
@@ -606,6 +624,7 @@ export default new Vuex.Store({
     },
     getCommentList: function ({ commit, state }, houseCode) {
       //houseCode 와 userid가 일치하는거 가져옴
+      // console.log("액션 댓글", houseCode);
       let params = {
         houseCode: houseCode,
         userid: state.loginUser.userid,
@@ -617,7 +636,27 @@ export default new Vuex.Store({
       })
         .then((res) => {
           if (res.data.msg == "success") {
+            // console.log("커밋");
             commit("SET_COMMENT_LIST", res.data.commentList);
+            commit("SET_HOUSE_CODE", houseCode);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    deleteComment: function ({ commit, state }, cmNum) {
+      //houseCode 와 userid가 일치하는거 가져옴
+      console.log("액션 댓글", cmNum);
+      axios({
+        url: API_COMMNET_URL,
+        method: "delete",
+        data: cmNum,
+      })
+        .then((res) => {
+          if (res.data.msg == "success") {
+            commit("DELETE_COMMENT", cmNum);
+            alert("삭제 성공");
           }
         })
         .catch((err) => {

@@ -58,18 +58,18 @@ export default {
     },
 
     async displayMarker(houseList) {
-      console.log("디스플레이마커!!");
+      // console.log("디스플레이마커!!");
 
       var geocoder = new kakao.maps.services.Geocoder();
       let housePosition = [];
-      console.log(housePosition);
+      // console.log(housePosition);
       for (let i = 0; i < houseList.length; i++) {
         let where = houseList[i].법정동 + " " + houseList[i].지번;
         let tmp = await this.getLatLng(where);
         housePosition.push([tmp.Ma, tmp.La]);
       }
 
-      console.log(housePosition);
+      // console.log(housePosition);
 
       if (this.markers.length > 0) {
         this.markers.forEach((marker) => marker.setMap(null));
@@ -85,10 +85,7 @@ export default {
             })
         );
 
-        const bounds = positions.reduce(
-          (bounds, latlng) => bounds.extend(latlng),
-          new kakao.maps.LatLngBounds()
-        );
+        const bounds = positions.reduce((bounds, latlng) => bounds.extend(latlng), new kakao.maps.LatLngBounds());
 
         this.map.setBounds(bounds);
       }

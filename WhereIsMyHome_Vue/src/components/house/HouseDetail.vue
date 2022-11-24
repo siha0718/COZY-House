@@ -29,6 +29,7 @@
                 <li>즉시 입주 가능</li>
                 <li>남향</li>
                 <li>엘레베이터 있음</li>
+                <li>on : {{ house.star }}</li>
               </ul>
             </div>
             <div class="borderStyle mt-5 mb-5"></div>
@@ -56,7 +57,9 @@ export default {
   },
 
   data() {
-    return {};
+    return {
+      content: "",
+    };
   },
   created() {
     // if (!this.house) {
@@ -65,8 +68,9 @@ export default {
     // }
   },
   computed: {
-    ...mapState(["house"]),
+    ...mapState(["house", "houseCode", "loginUser", "commentList"]),
   },
+  methods: {},
 };
 </script>
 <style scoped>
