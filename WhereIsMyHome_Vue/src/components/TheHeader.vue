@@ -10,7 +10,10 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse justify-content-center" id="collapsibleNavbar">
+      <div
+        class="collapse navbar-collapse justify-content-center"
+        id="collapsibleNavbar"
+      >
         <ul class="navbar-nav">
           <li class="nav-item">
             <router-link class="nav-link" :to="'/house'">HOUSE</router-link>
@@ -19,10 +22,12 @@
             <a href="#" @click.prevent="star" class="nav-link">즐겨찾기</a>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" :to="'/house'">매물올리기</router-link>
+            <router-link class="nav-link" :to="'/house'"
+              >매물올리기</router-link
+            >
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" :to="'/house'">건의사항</router-link>
+            <router-link class="nav-link" :to="'/board'">건의사항</router-link>
           </li>
         </ul>
       </div>
@@ -32,7 +37,9 @@
         </li>
 
         <li class="nav-item justify-content-end">
-          <router-link class="nav-link" :to="'/user/detail'">회원수정</router-link>
+          <router-link class="nav-link" :to="'/user/detail'"
+            >회원수정</router-link
+          >
         </li>
 
         <li class="nav-item justify-content-end">
@@ -46,7 +53,9 @@
           <router-link class="nav-link" :to="'/user/login'">로그인</router-link>
         </li>
         <li class="nav-item justify-content-end">
-          <router-link class="nav-link" :to="'/user/regist'">회원가입</router-link>
+          <router-link class="nav-link" :to="'/user/regist'"
+            >회원가입</router-link
+          >
         </li>
       </ul>
     </div>

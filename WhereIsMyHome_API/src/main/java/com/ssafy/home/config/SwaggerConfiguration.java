@@ -46,7 +46,7 @@ public class SwaggerConfiguration {
 	}
 
 	@Bean
-	public Docket boardApi() {
+	public Docket commentdApi() {
 		return getDocket("comment", "댓글", Predicates.or(PathSelectors.regex("/comment.*")));
 	}
 
@@ -58,6 +58,11 @@ public class SwaggerConfiguration {
 	@Bean
 	public Docket starApi() {
 		return getDocket("star", "즐겨찾기", Predicates.or(PathSelectors.regex("/star.*")));
+
+	}
+	@Bean
+	public Docket boardApi() {
+		return getDocket("board", "보드", Predicates.or(PathSelectors.regex("/board.*")));
 
 	}
 

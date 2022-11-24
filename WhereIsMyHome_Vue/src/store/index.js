@@ -27,6 +27,7 @@ export default new Vuex.Store({
     guguns: [{ value: null, text: "선택하세요" }],
     houses: [],
     house: null,
+    positions: [],
     ////////STAR////////
     starList: [],
     star: {},
@@ -78,6 +79,7 @@ export default new Vuex.Store({
           break;
         }
       }
+      state.board = board;
     },
     DELETE_BOARD(state, articleno) {
       for (let i = 0; i < state.boardList.length; i++) {
@@ -233,13 +235,19 @@ export default new Vuex.Store({
 
     ////////BOARD////////
     getBoardList({ commit }) {
+      console.log("보드 액션");
       axios({
         url: API_BOARD_URL,
         method: "get",
       })
         .then((res) => {
-          // console.log(res);
-          commit("GET_BOARD_LIST", res.data);
+          if (res.data.msg == "success") {
+            commit("GET_BOARD_LIST", res.data.boardList);
+          } else {
+            alert("글 불러오기 실패");
+            console.log(res.data.msg);
+            router.push("/");
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -252,8 +260,11 @@ export default new Vuex.Store({
         data: board,
       })
         .then((res) => {
-          console.log(res);
-          commit("CREATE_BOARD", board);
+          if (res.data.msg == "success") {
+            commit("CREATE_BOARD", board);
+          } else {
+            alert("글 작성 실패");
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -261,16 +272,34 @@ export default new Vuex.Store({
     },
     selectBoard({ commit }, board_num) {
       commit("SET_BOARD", board_num);
+      axios({
+        url: API_BOARD_URL + "/" + board_num,
+        method: "get",
+        data: board,
+      })
+        .then((res) => {
+          if (res.data.msg == "success") {
+            commit("CREATE_BOARD", board);
+          } else {
+            alert("글 작성 실패");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
-    updateBoard({ context }, board) {
+    updateBoard({ commit }, board) {
       axios({
         url: API_BOARD_URL,
         method: "put",
         data: board,
       })
         .then((res) => {
-          console.log(res);
-          commit("UPDATE_BOARD", board);
+          if (res.data.msg == "success") {
+            commit("UPDATE_BOARD", board);
+          } else {
+            alert("글 수정 실패");
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -278,16 +307,15 @@ export default new Vuex.Store({
     },
     deleteBoard({ context }, board_num) {
       axios({
-        url: API_BOARD_URL,
+        url: API_BOARD_URL + "/" + board_num,
         method: "delete",
-        data: board,
-        params: {
-          articleno: board_num,
-        },
       })
         .then((res) => {
-          console.log(res);
-          commit("DELETE_BOARD", board_num);
+          if (res.data.msg == "success") {
+            commit("DELETE_BOARD", board_num);
+          } else {
+            alert("글 삭제 실패");
+          }
         })
         .catch((err) => {
           console.log(err);

@@ -87,6 +87,17 @@ CREATE TABLE IF NOT EXISTS `project`.`bookmark` (
   `userid` VARCHAR(45) NOT NULL)
 ENGINE = InnoDB;
 
+DROP TABLE IF EXISTS `project`.`board` ;
+
+CREATE TABLE `project`.`board` (
+  `boardno` INT NOT NULL AUTO_INCREMENT,
+  `userid` VARCHAR(45) NULL,
+  `subject` VARCHAR(45) NULL,
+  `content` MEDIUMTEXT NULL,
+  `regtime` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`boardno`))
+ ENGINE = InnoDB;
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

@@ -3,18 +3,20 @@
 ***********************************************/
 
 .leftSelect {
-  /*margin-top: 60px;*/
-  /*position: relative;*/
-  /*margin:0px 0px 0px 70px;*/
   float: left;
-  margin-left: 70px;
   width: 400px;
-  /*text-align: center;*/
+  height: 770px;
+  z-index: 100;
+  border-radius: 20px 20px 20px 20px;
+  background-color: white;
+  position: absolute;
+  margin-top: 0px !important;
+  padding-left: 20px;
 }
 
-.search {
+.searchInput {
   /*position: absolute;*/
-  margin-top: 40px;
+  margin-top: 20px;
   /*left: 76px;*/
   width: 360px;
   height: 60px;
@@ -32,12 +34,12 @@
   line-height: 60px;
 }
 
-.group {
-  /*position:absolute;*/
+/* .group {
+  
   margin-top: 0px;
   margin-left: 0px;
   width: 400px;
-}
+} */
 
 .apt {
   /*position: absolute;*/
@@ -110,10 +112,6 @@
 }
 
 .typeText {
-  /*position: absolute;*/
-  /* Layout Properties */
-  margin-top: 55px;
-  /*left: 84px;*/
   width: 80px;
   height: 24px;
 
@@ -123,6 +121,20 @@
   letter-spacing: 0px;
   color: #000000;
   opacity: 1;
+}
+
+.selectBtn {
+  width: 350px !important;
+}
+
+.selectBtnIn {
+  border: 1px solid #d4b2a7;
+  border-radius: 90%;
+}
+
+.selectBtnIn1 {
+  padding-right: 10px;
+  border-radius: 90% !important;
 }
 
 .inner {
@@ -184,10 +196,15 @@
   margin-left: 15px;
 }
 
+.form-select {
+  width: 80px !important;
+}
+
 .selectBox {
-  display: inline-flex;
+  display: flex;
   justify-content: space-between;
   width: 350px;
+  margin: 0px 0px 0px 0px !important;
 }
 
 .sido {
@@ -232,12 +249,40 @@
   /*left: 76px;*/
 }
 
-.form-range {
+.rangeInput {
+  width: 350px;
+  background: linear-gradient(
+    to right,
+    #d4b2a7 0%,
+    #f1e3df 50%,
+    #ececec 50%,
+    #ececec 100%
+  );
+  border-radius: 8px;
+  outline: none;
+  transition: background 450ms ease-in;
+  -webkit-appearance: none;
   accent-color: #d4b2a7;
 }
 
 .priceBox {
   margin-top: 20px;
+}
+
+.selected_price {
+  width: 350px;
+}
+
+.selected_price input {
+  border: 1px solid rgb(163, 143, 133, 0.5);
+  width: 100%;
+}
+
+.filter__price .selected_price--wrap {
+  display: flex;
+  /* align-items: center; */
+  justify-content: space-between;
+  /* width: 100%; */
 }
 
 .typeText3 {
@@ -257,9 +302,7 @@
   opacity: 1;
 }
 
-.searchBtn {
-  /*position: absolute;*/
-  /* Layout Properties */
+.searchBtn-s {
   margin-top: 20px;
   /*left: 76px;*/
   width: 360px;
@@ -270,4 +313,35 @@
   background: #e7d7c9 0% 0% no-repeat padding-box;
   border-radius: 10px;
   opacity: 1;
+}
+
+.btn-check {
+  border-color: 1px solid #353332 !important;
+}
+
+.btn-check:checked + .btn,
+.btn.active,
+.btn.show,
+.btn:first-child:active,
+:not(.btn-check) + .btn:active {
+  border-color: #d4b2a7 !important;
+  background-color: #d4b2a7 !important;
+}
+
+.offcanvas.offcanvas-end {
+  top: 76px !important;
+  right: 0;
+  width: var(--bs-offcanvas-width);
+  border-left: var(--bs-offcanvas-border-width) solid
+    var(--bs-offcanvas-border-color);
+  transform: translateX(100%);
+  visibility: visible;
+}
+
+.offcanvas-backdrop.show {
+  opacity: 0 !important;
+}
+
+.offcanvas-backdrop.show::after {
+  visibility: visible;
 }

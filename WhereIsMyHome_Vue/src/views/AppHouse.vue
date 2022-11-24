@@ -1,10 +1,16 @@
 <template>
-  <div>
+  <div class="qqqq">
     <house-search></house-search>
     <!-- 중앙에 맵 -->
     <house-map></house-map>
     <!-- 라우터뷰로 처음에 리스트, 리스트에서 선택누르면 디테일가지 -->
-    <house-list></house-list>
+
+    <house-list
+      class="offcanvas offcanvas-end"
+      tabindex="-1"
+      id="offcanvasRight"
+      aria-labelledby="offcanvasRightLabel"
+    ></house-list>
   </div>
 </template>
 

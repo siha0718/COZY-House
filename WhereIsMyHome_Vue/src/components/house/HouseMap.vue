@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div @click="displayMarker()">ddddddddd</div>
     <div id="map"></div>
   </div>
 </template>
@@ -14,17 +13,13 @@ export default {
     return {
       markers: [],
       infowindow: null,
-      markerPositions1: [
-        [37.5693369136369, 127.025374102832],
-        [37.5608432938815, 127.02668707042],
-        [37.5684498209013, 127.028040516397],
-      ],
       housepos: [],
     };
   },
 
   //mounted ==========================================================================================
   mounted() {
+    console.log("마운트");
     if (window.kakao && window.kakao.maps) {
       this.initMap();
     } else {
@@ -32,7 +27,7 @@ export default {
       /* global kakao */
       script.onload = () => kakao.maps.load(this.initMap);
       script.src =
-        "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=fd238029c35092754edfae10d0b0e6f9&libraries=services&autoload=false";
+        "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=fd238029c35092754edfae10d0b0e6f9&libraries=services";
       document.head.appendChild(script);
     }
   },
@@ -45,31 +40,42 @@ export default {
         center: new kakao.maps.LatLng(37.566824, 126.978649),
         level: 5,
       };
-
-      //지도 객체를 등록합니다.
-      //지도 객체는 반응형 관리 대상이 아니므로 initMap에서 선언합니다.
       this.map = new kakao.maps.Map(container, options);
     },
+    async getLatLng(addr) {
+      // 주소-좌표 변환 객체를 생성합니다
+      let geocoder = new kakao.maps.services.Geocoder();
 
-    displayMarker(houseList) {
-      console.log("디스플레이마커!!");
-      console.log(houseList);
-      var housePosition = [];
-      // 주소로 좌표를 검색합니다
-      var geocoder = new kakao.maps.services.Geocoder();
-      for (let i = 0; i < houseList.length; i++) {
-        let where = houseList[i].법정동 + " " + houseList[i].지번;
-        geocoder.addressSearch(where, function (result, status) {
+      return await new Promise((resolve) => {
+        geocoder.addressSearch(addr, function (result, status) {
+          // 정상적으로 검색이 완료됐으면
           if (status === kakao.maps.services.Status.OK) {
-            let tmp = new kakao.maps.LatLng(result[0].y, result[0].x);
-            housePosition.push([tmp.Ma, tmp.La]);
+            resolve(new kakao.maps.LatLng(result[0].y, result[0].x));
           }
         });
-      }
-      console.log("housePosition", housePosition);
-      console.log("this.markerPositions1", this.markerPositions1);
+      });
+    },
 
-      const positions = this.markerPositions1.map((position) => new kakao.maps.LatLng(...position));
+    async displayMarker(houseList) {
+      console.log("디스플레이마커!!");
+
+      var geocoder = new kakao.maps.services.Geocoder();
+      let housePosition = [];
+      console.log(housePosition);
+      for (let i = 0; i < houseList.length; i++) {
+        let where = houseList[i].법정동 + " " + houseList[i].지번;
+        let tmp = await this.getLatLng(where);
+        housePosition.push([tmp.Ma, tmp.La]);
+      }
+
+      console.log(housePosition);
+
+      if (this.markers.length > 0) {
+        this.markers.forEach((marker) => marker.setMap(null));
+      }
+      const positions = housePosition.map(
+        (position) => new kakao.maps.LatLng(...position)
+      );
 
       if (positions.length > 0) {
         this.markers = positions.map(
@@ -95,18 +101,16 @@ export default {
     ...mapState(["houses"]),
   },
   created() {
-    eventBus.$on("housList", (housList) => {
-      this.displayMarker(housList);
+    eventBus.$on("housList", (houseList) => {
+      this.displayMarker(houseList);
     });
   },
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #map {
-  width: 600px;
-  height: 600px;
+  width: 100%;
+  height: 1080px;
 }
 
 .button-group {
