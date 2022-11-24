@@ -1,5 +1,5 @@
 <template>
-  <div class="qqqq">
+  <div>
     <house-search></house-search>
     <!-- 중앙에 맵 -->
     <house-map></house-map>

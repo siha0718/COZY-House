@@ -4,16 +4,17 @@
     <div style="text-align: right" class="mb-5 writebtn">
       <b-button @click="moveWrite" variant="primary">Write</b-button>
     </div>
-    <div v-if="articles.length">
-      <b-table striped hover id="article-list" :fields="fields" :items="articles">
+    <div v-if="boardList.length">
+      <b-table striped hover id="article-list" :fields="fields" :items="boardList">
         <!-- b-table 안에서 태그에 기능넣고 싶을 떄, template태그 안에서 작성해주면 된다!  -->
         <!-- 1. 특정 컬럼에 클릭 이벤트 -->
-        <template #cell(title)="data">
-          <router-link :to="`/board/view/${data.item.no}`">{{ data.item.title }}</router-link>
+        <template #cell(subject)="data">
+          <!-- <router-link :to="`/board/view/${data.item.no}`">{{ data.item.subject }}</router-link> -->
+          <div @click="view(data.item)">{{ data.item.subject }}</div>
         </template>
         <!-- 2. 특정 컬럼에 filtering -->
         <template #cell(regtime)="data">
-          {{ data.item.regtime | transDate }}
+          {{ data.item.regtime }}
         </template>
       </b-table>
     </div>
@@ -46,7 +47,7 @@ export default {
           label: "글내용",
         },
         {
-          key: "writer",
+          key: "userid",
           label: "작성자",
         },
         {
@@ -60,15 +61,24 @@ export default {
 
   created() {
     console.log("보드크리에이트");
-    this.getBoardList;
+    this.getBoardList();
   },
   computed: {
     ...mapState(["boardList"]),
   },
   methods: {
-    ...mapActions(["getBoardList"]),
+    ...mapState(["loginUser"]),
+    ...mapActions(["getBoardList", "selectBoard"]),
     moveWrite() {
-      this.$router.push({ name: "boardwrite" });
+      if (!this.loginUser()) {
+        alert("로그인하세요");
+      } else {
+        this.$router.push({ name: "boardwrite" });
+      }
+    },
+    view(board) {
+      this.selectBoard(board);
+      this.$router.push("/board/view");
     },
   },
 };

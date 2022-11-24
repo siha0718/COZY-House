@@ -46,7 +46,7 @@
 	<!-- 유저 수정 -->	
 	<update id="modify" parameterType="UserDto">
 		update user
-		set username = #{username}, userpwd = #{userpwd}, useremail = #{email}
+		set username = #{username}, userpwd = #{userpwd}, useremail = #{useremail}
 		where userid = #{userid}
 	</update>
 	

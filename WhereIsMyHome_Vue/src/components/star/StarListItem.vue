@@ -15,7 +15,9 @@
       <!-- Product actions-->
       <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
         <div class="text-center">
-          <a class="btn btn-outline-dark mt-auto" href="#">즐겨찾기 해제</a>
+          <a class="btn btn-outline-dark mt-auto" href="#" @click.prevent="deleteStar"
+            >즐겨찾기 해제</a
+          >
         </div>
       </div>
     </div>
@@ -24,6 +26,7 @@
 </template>
 
 <script>
+import { mapState, mapActions, mapMutations } from "vuex";
 export default {
   name: "StarListItem",
   data() {
@@ -35,8 +38,17 @@ export default {
     star: Object,
   },
   methods: {
+    ...mapActions(["deleteStar"]),
+    ...mapState(["loginUser"]),
     test() {
       console.log(this.star);
+    },
+    deleteStar() {
+      let dstar = {
+        userid: this.loginUser().userid,
+        houseCode: this.star.houseCode,
+      };
+      this.$store.dispatch("deleteStar", dstar);
     },
   },
 };

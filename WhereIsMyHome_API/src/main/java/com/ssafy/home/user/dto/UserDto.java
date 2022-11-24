@@ -43,8 +43,8 @@ public class UserDto {
 	public String getUseremail() {
 		return useremail;
 	}
-	public void setUseremail(String email) {
-		this.useremail = email;
+	public void setUseremail(String useremail) {
+		this.useremail = useremail;
 	}
 	public String getJoindate() {
 		return joindate;

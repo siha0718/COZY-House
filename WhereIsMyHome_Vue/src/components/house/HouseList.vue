@@ -94,11 +94,7 @@
     </div>
     <div class="offcanvas-body">
       <div class="areaList" v-if="houses && houses.length != 0">
-        <house-list-item
-          v-for="(house, index) in houses"
-          :key="index"
-          :house="house"
-        />
+        <house-list-item v-for="(house, index) in houses" :key="index" :house="house" />
       </div>
       <div class="areaList" v-else>매물이 존재하지 않습니다.</div>
     </div>
@@ -117,15 +113,38 @@ export default {
     HouseListItem,
   },
   data() {
-    return {};
+    return {
+      houseList: [],
+    };
   },
   computed: {
-    ...mapState(["houses"]),
+    ...mapState(["houses", "starList", "loginUser"]),
+  },
+  watch: {
+    houses: function () {
+      if (!this.loginUser) {
+        return;
+      }
+      //디비접근해서 현재유저의 즐겨찾기목록 다긁어오기
+      //그 긁어온거랑 하우스 정보 비교해서 일치하면 즐겨찾기 된걸로 표시해서 this.houseList에 저장하기
+      this.$store.dispatch(getStars);
+      console.log(this.starList);
+
+      // for (let i = 0; i < this.houses.length; i++){
+      //   for (let j = 0; j < this.starList.length; j++){
+      //     if (houses[i].법정동 == starList[j].houseCode) {
+
+      //     }
+      //   }
+      // }
+    },
   },
   methods: {
     test() {
       console.log("하우스 사이즈는");
       console.log(this.houses);
+
+      // this.house.법정동 + this.house.지번 + this.house.년 + this.house.월;
     },
   },
 };

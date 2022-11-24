@@ -1,8 +1,13 @@
 <template>
-  <nav class="navbar navbar-expand-sm">
-    <div class="container-fluid header">
-      <router-link class="navbar-brand logo" :to="'/'">LOGO</router-link>
-      <button
+  <nav class="navbar navbar-expand-sm row">
+    <div class="container-fluid headernav">
+      <div class="col-3">
+        <router-link class="navbar-brand logo" :to="'/'">
+          <img src="@/assets/siha_logo.jpg" alt="" class="logoImg" />
+        </router-link>
+      </div>
+
+      <!-- <button
         class="navbar-toggler"
         type="button"
         data-bs-toggle="collapse"
@@ -13,8 +18,9 @@
       <div
         class="collapse navbar-collapse justify-content-center"
         id="collapsibleNavbar"
-      >
-        <ul class="navbar-nav">
+      > -->
+      <div class="col-6">
+        <ul class="navbar-nav justify-content-center">
           <li class="nav-item">
             <router-link class="nav-link" :to="'/house'">HOUSE</router-link>
           </li>
@@ -22,42 +28,39 @@
             <a href="#" @click.prevent="star" class="nav-link">즐겨찾기</a>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" :to="'/house'"
-              >매물올리기</router-link
-            >
+            <router-link class="nav-link" :to="'/house'">매물올리기</router-link>
           </li>
           <li class="nav-item">
             <router-link class="nav-link" :to="'/board'">건의사항</router-link>
           </li>
         </ul>
       </div>
-      <ul class="navbar-nav" v-if="loginUser">
-        <li class="nav-item justify-content-end">
-          <div class="nav-link">"{{ loginUser.username }}"님 어서오세요</div>
-        </li>
 
-        <li class="nav-item justify-content-end">
-          <router-link class="nav-link" :to="'/user/detail'"
-            >회원수정</router-link
-          >
-        </li>
+      <div class="col-2">
+        <ul class="navbar-nav nav" v-if="loginUser">
+          <li class="nav-item justify-content-end">
+            <div class="nav-link">"{{ loginUser.username }}"님 어서오세요</div>
+          </li>
 
-        <li class="nav-item justify-content-end">
-          <a class="nav-link" @click.prevent="logout">로그아웃</a>
-          <!-- <div class="nav-link" @click="logout">로그아웃</div> -->
-          <!-- <router-link class="nav-link" @click="logout">로그아웃</router-link> -->
-        </li>
-      </ul>
-      <ul class="navbar-nav" v-else>
-        <li class="nav-item justify-content-end">
-          <router-link class="nav-link" :to="'/user/login'">로그인</router-link>
-        </li>
-        <li class="nav-item justify-content-end">
-          <router-link class="nav-link" :to="'/user/regist'"
-            >회원가입</router-link
-          >
-        </li>
-      </ul>
+          <li class="nav-item justify-content-end">
+            <router-link class="nav-link" :to="'/user/detail'">회원수정</router-link>
+          </li>
+
+          <li class="nav-item justify-content-end">
+            <a class="nav-link" @click.prevent="logout">로그아웃</a>
+            <!-- <div class="nav-link" @click="logout">로그아웃</div> -->
+            <!-- <router-link class="nav-link" @click="logout">로그아웃</router-link> -->
+          </li>
+        </ul>
+        <ul class="navbar-nav" v-else>
+          <li class="nav-item justify-content-end">
+            <router-link class="nav-link" :to="'/user/login'">로그인</router-link>
+          </li>
+          <li class="nav-item justify-content-end">
+            <router-link class="nav-link" :to="'/user/regist'">회원가입</router-link>
+          </li>
+        </ul>
+      </div>
     </div>
   </nav>
 </template>

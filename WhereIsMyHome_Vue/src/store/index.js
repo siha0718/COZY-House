@@ -65,27 +65,13 @@ export default new Vuex.Store({
     CREATE_BOARD(state, board) {
       state.boardList.push(board);
     },
-    SET_BOARD(state, articleno) {
-      for (let i = 0; i < state.boardList.length; i++) {
-        if (boardList[i].articleno == articleno) {
-          state.board = boardList[i];
-          break;
-        }
-      }
-    },
-    UPDATE_BOARD(state, board) {
-      for (let i = 0; i < state.boardList.length; i++) {
-        if (boardList[i].articleno == board.articleno) {
-          state.boardList.splice(i, i + 1);
-          break;
-        }
-      }
+    SET_BOARD(state, board) {
       state.board = board;
     },
-    DELETE_BOARD(state, articleno) {
+    DELETE_BOARD(state, boardno) {
       for (let i = 0; i < state.boardList.length; i++) {
-        if (boardList[i].articleno == articleno) {
-          state.board = boardList[i];
+        if (state.boardList[i].boardno == boardno) {
+          state.boardList.splice(i, 1);
           break;
         }
       }
@@ -139,7 +125,6 @@ export default new Vuex.Store({
   actions: {
     //회원가입
     createUser: function ({ context }, user) {
-      console.log(user);
       axios({
         url: API_USER_URL + `/regist`,
         method: "POST",
@@ -211,8 +196,6 @@ export default new Vuex.Store({
     },
     //회원탈퇴
     deleteUser: function ({ commit, state }) {
-      console.log("액션 딜리트 들어옴");
-      console.log(state.loginUser);
       axios({
         url: API_USER_URL,
         method: "DELETE",
@@ -236,7 +219,6 @@ export default new Vuex.Store({
 
     ////////BOARD////////
     getBoardList({ commit }) {
-      console.log("보드 액션");
       axios({
         url: API_BOARD_URL,
         method: "get",
@@ -263,6 +245,7 @@ export default new Vuex.Store({
         .then((res) => {
           if (res.data.msg == "success") {
             commit("CREATE_BOARD", board);
+            router.push("/board");
           } else {
             alert("글 작성 실패");
           }
@@ -271,23 +254,9 @@ export default new Vuex.Store({
           console.log(err);
         });
     },
-    selectBoard({ commit }, board_num) {
-      commit("SET_BOARD", board_num);
-      axios({
-        url: API_BOARD_URL + "/" + board_num,
-        method: "get",
-        data: board,
-      })
-        .then((res) => {
-          if (res.data.msg == "success") {
-            commit("CREATE_BOARD", board);
-          } else {
-            alert("글 작성 실패");
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    selectBoard({ commit }, board) {
+      // console.log(board);
+      commit("SET_BOARD", board);
     },
     updateBoard({ commit }, board) {
       axios({
@@ -297,7 +266,8 @@ export default new Vuex.Store({
       })
         .then((res) => {
           if (res.data.msg == "success") {
-            commit("UPDATE_BOARD", board);
+            commit("SET_BOARD", board);
+            router.push("/board/view");
           } else {
             alert("글 수정 실패");
           }
@@ -306,14 +276,15 @@ export default new Vuex.Store({
           console.log(err);
         });
     },
-    deleteBoard({ context }, board_num) {
+    deleteBoard({ commit }, board) {
       axios({
-        url: API_BOARD_URL + "/" + board_num,
+        url: API_BOARD_URL + "/" + board.boardno,
         method: "delete",
       })
         .then((res) => {
           if (res.data.msg == "success") {
-            commit("DELETE_BOARD", board_num);
+            commit("DELETE_BOARD", board.boardno);
+            router.push("/board");
           } else {
             alert("글 삭제 실패");
           }
@@ -325,8 +296,7 @@ export default new Vuex.Store({
 
     ////////APT////////
     getSido({ commit }) {
-      const url =
-        "https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes";
+      const url = "https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes";
       let params = "regcode_pattern=" + "*00000000" + "&is_ignore_zero=true";
       fetch(`${url}?${params}`)
         .then((response) => response.json())
@@ -336,13 +306,8 @@ export default new Vuex.Store({
         });
     },
     getGugun({ commit }, sidoCode) {
-      const url =
-        "https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes";
-      let params =
-        "regcode_pattern=" +
-        sidoCode.substr(0, 2) +
-        "*00000" +
-        "&is_ignore_zero=true";
+      const url = "https://grpc-proxy-server-mkvo6j4wsq-du.a.run.app/v1/regcodes";
+      let params = "regcode_pattern=" + sidoCode.substr(0, 2) + "*00000" + "&is_ignore_zero=true";
       fetch(`${url}?${params}`)
         .then((response) => response.json())
         .then((data) => {
@@ -590,13 +555,12 @@ export default new Vuex.Store({
         url: API_STAR_URL,
         method: "delete",
         data: star,
-        params: params,
       })
         .then((res) => {
           if (res.data.msg == "success") {
             commit("DELETE_USER_STARS", star);
           } else {
-            alert("스타 추가 실패");
+            alert("스타 삭제 실패");
           }
         })
         .catch((err) => {

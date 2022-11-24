@@ -27,7 +27,8 @@ export default {
       /* global kakao */
       script.onload = () => kakao.maps.load(this.initMap);
       script.src =
-        "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=fd238029c35092754edfae10d0b0e6f9&libraries=services";
+        "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=a55445555a66d8b5e8ad74af0600510c&libraries=services";
+      //"//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=fd238029c35092754edfae10d0b0e6f9&libraries=services";
       document.head.appendChild(script);
     }
   },
@@ -73,9 +74,7 @@ export default {
       if (this.markers.length > 0) {
         this.markers.forEach((marker) => marker.setMap(null));
       }
-      const positions = housePosition.map(
-        (position) => new kakao.maps.LatLng(...position)
-      );
+      const positions = housePosition.map((position) => new kakao.maps.LatLng(...position));
 
       if (positions.length > 0) {
         this.markers = positions.map(

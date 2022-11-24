@@ -29,12 +29,12 @@ const routes = [
         component: () => import("@/components/board/BoardWrite"),
       },
       {
-        path: "view/:no",
+        path: "view",
         name: "boardview",
         component: () => import("@/components/board/BoardView"),
       },
       {
-        path: "modify/:no",
+        path: "modify",
         name: "boardmodify",
         component: () => import("@/components/board/BoardModify"),
       },

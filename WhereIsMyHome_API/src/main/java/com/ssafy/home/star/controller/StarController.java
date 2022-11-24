@@ -134,7 +134,7 @@ public class StarController {
 			
 			int res = service.deleteStar(starDto);
 			
-			if (res == 1) {
+			if (res >= 1) {
 				resMap.put("msg", SUCCESS);
 				status = HttpStatus.ACCEPTED;
 			}

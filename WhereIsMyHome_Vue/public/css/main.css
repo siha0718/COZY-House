@@ -178,11 +178,13 @@ input::selection {
   /*margin-left: 90px !important;
   margin-right: 90px !important;*/
   margin: auto 90px;
+
+  vertical-align: middle;
   /*position: absolute;*/
 }
 
-.header {
-  height: 76px;
+.headernav {
+  height: 80px;
   width: 100%;
   background: #ffffff;
   border-bottom: 0.5px solid #a38f85;
@@ -198,14 +200,23 @@ input::selection {
 
 .logo {
   position: absolute;
-  top: 19px;
+  top: 0px !important;
   left: 76px;
   width: 180px;
-  height: 67px;
+  height: 60px;
   transform: matrix(1, 0, 0, 1, 0, 0);
   background: var(--unnamed-color-ede9e3) 0% 0% no-repeat padding-box;
   /* background: #EDE9E3 0% 0% no-repeat padding-box; */
   opacity: 1;
   text-align: center;
-  line-height: 60px;
+  line-height: 50px;
+}
+
+.logoImg {
+  width: 150px;
+  /* height: 47px; */
+}
+
+.loginNav {
+  /* margin-left: 100px; */
 }

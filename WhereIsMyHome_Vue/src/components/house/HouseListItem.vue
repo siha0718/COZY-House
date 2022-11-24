@@ -52,7 +52,15 @@ export default {
       console.log(this.house);
 
       let aptcode =
-        this.house.법정동 + this.house.지번 + this.house.년 + this.house.월;
+        this.house.법정동 +
+        "뷁" +
+        this.house.지번 +
+        "뷁" +
+        this.house.년 +
+        "뷁" +
+        this.house.월 +
+        "뷁" +
+        this.house.거래금액;
 
       let newHouse = {
         houseCode: aptcode,
