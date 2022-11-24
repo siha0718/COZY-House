@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.home.comment.dao.CommentMapper">
+
+	<insert id="writeComment" parameterType="CommentDto">
+		INSERT INTO comment (content,houseCode,userid)
+		VALUES (#{content}, #{houseCode}, #{userid})
+	</insert>
+	
+	<update id="modifyComment" parameterType="CommentDto">
+		UPDATE comment
+		SET content = #{content}
+		WHERE cmNum = #{cmNum}
+	</update>
+
+	<select id="getCommentList" parameterType="Map" resultType="CommentDto">
+		SELECT 	cmNum, content, houseCode, userid, time
+		FROM comment
+		WHERE houseCode = #{houseCode} AND userid =#{userid}
+		ORDER BY date DESC;
+	</select>
+	
+	<delete id="deleteComment" parameterType="CommentDto">
+		delete from comment
+		where cmNum = #{cmNum}
+	</delete>
+
+
+	<select id="selectCommentTotalCount" parameterType="CommentDto" resultType="int">
+		SELECT COUNT(*)
+		FROM comment
+		WHERE aptCode = #{aptCode}
+	</select>
+
+</mapper>

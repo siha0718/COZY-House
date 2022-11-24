@@ -1,0 +1,45 @@
+
+
+.fw-bolder {
+    color: #614d43;
+    font-size: 1.5rem;
+}
+
+.subBtn{
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
+.btn {
+    width: 48%;
+    background-color: #e7d7c9;
+}
+
+.btn:hover{
+    background-color: #d4b2a7;
+}
+
+.boardBtn {
+    border-color: 1px solid #e7d7c9;
+    
+}
+
+.writeBtn{
+    width : 150px;
+    border-color: 1px solid #d4b2a7!important;
+    background-color: #d4b2a7;
+    color: #fff;
+}
+
+
+.boardTitle {
+    color: #614d43;
+    font-size: 2.3rem;
+    font-weight: 700;
+}
+
+.bg-light{
+    background-color: rgba(253, 237, 231, 0.2)!important;
+}
